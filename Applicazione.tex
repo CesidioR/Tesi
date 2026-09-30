@@ -1,5 +1,82 @@
 % !TEX root = main.tex
+
+\section{Interfaccia e funzionalità}
+\label{sec:ui}
+
+In questa sezione l'interfaccia dell'applicazione, organizzata attorno a due schermate principali.
+La UI è pensata per essere semplice e intuitiva: un utente deve poter capire facilmente come muoversi all'interno dell'app e sfruttare le varie funzionalità.
+Non è richiesta all'utente una conoscenza approfondita della teoria finanziaria per poter usufruire dell'app, anche se ovviamente è sappia almeno come funzionano le varie strategie a grandi linee.
+
+
+\subsection{Elenco dei titoli}
+La seconda schermata mostra l'elenco dei titoli dell'indice S\&P~500. Ogni voce
+riporta il logo dell'azienda, il prezzo più recente, un mini-grafico
+(sparkline) dell'andamento e la variazione percentuale, colorata in verde o
+rosso. Una barra di ricerca in alto permette di filtrare i titoli per simbolo.
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=0.32\textwidth]{ui_assets.png}
+  \caption{Elenco dei titoli con barra di ricerca e card riepilogative.}
+  \label{fig:ui-assets}
+\end{figure}
+
+\subsection{Dettaglio del titolo}
+Toccando un titolo si apre la schermata di dettaglio, con il prezzo, la variazione
+e un grafico interattivo che può essere visualizzato come \emph{candele} o come
+\emph{linea}, su orizzonti temporali selezionabili (una settimana, un mese, un
+anno, oppure l'intero storico). Da qui l'utente può aggiungere il titolo a uno dei
+propri portafogli tramite un apposito selettore.
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=0.32\textwidth]{ui_detail_candle.png}\hfill
+  %\includegraphics[width=0.32\textwidth]{ui_detail_line.png}
+  \caption{Dettaglio del titolo: grafico a candele e a linea, con selettore di
+  periodo e pulsante di aggiunta al portafoglio.}
+  \label{fig:ui-detail}
+\end{figure}
+
+\subsection{Dashboard e gestione del portafoglio}
+La dashboard è il cuore dell'app. In alto un selettore permette di passare tra i
+portafogli; la carta centrale mostra il \textbf{valore corrente} del portafoglio e
+il guadagno o la perdita rispetto al capitale iniziale. Da qui si crea un nuovo
+portafoglio (indicando nome, capitale e commissioni) e si può riavviarlo o
+eliminarlo.
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=0.32\textwidth]{ui_dashboard.png}\hfill
+  %\includegraphics[width=0.32\textwidth]{ui_create.png}
+  \caption{Dashboard con la carta del portafoglio e finestra di creazione.}
+  \label{fig:ui-dashboard}
+\end{figure}
+
+Sotto la carta sono elencati i titoli del portafoglio, ciascuno rimovibile, e i
+cinque \textbf{metodi di allocazione} selezionabili: Equipesato, Inverse
+Volatility, Target Volatility, Kelly e il modello DRL. Applicando un metodo,
+l'app calcola i pesi, ne mostra il costo di ribilanciamento e, dopo conferma, li
+assegna.
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=0.32\textwidth]{ui_methods.png}\hfill
+  %\includegraphics[width=0.32\textwidth]{ui_weights.png}
+  \caption{Selezione del metodo di allocazione e visualizzazione dei pesi
+  risultanti per ciascun metodo.}
+  \label{fig:ui-weights}
+\end{figure}
+
+Infine, un grafico di confronto mostra l'andamento simulato (\emph{backtest}) del
+capitale secondo le diverse strategie, affiancato da una tabella con le metriche
+principali (rendimento, Sharpe ratio, maximum drawdown), così che l'utente possa
+valutare visivamente le differenze tra i metodi.
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=0.45\textwidth]{ui_backtest.png}
+  \caption{Confronto delle strategie tramite backtest, con tabella delle metriche.}
+  \label{fig:ui-backtest}
+\end{figure}
+
 \section{Dettagli implementativi}
+In questa sezione si espongono le scelte implementative più interessanti adottate per lo sviluppo dell'applicazione.
+
 L'applicazione adotta un'architettura local-first cioè tutta l'elaborazione dei dati e le funzioni principali dell'app come il calcolo dei pesi e l'inferenza del modello avvengono sul dispositivo, l'unica interazione con la rete è il download periodico dei prezzi. I motivi dietro questa scelta sono:
 \begin{itemize}
     \item \textbf{Privacy e autonomia}: i portafogli dell'utente, le allocazioni e i risultati non lasciano mai il dispositivo.
@@ -26,7 +103,7 @@ Con tutti gli storici dei 503 titoli però esso raggiunge dimensioni di circa 33
 \subsection{Datasets}
 \label{sec:datasets}
 Il Dataset è in formato JSON, con due collezzioni principali: \lstinline{prices} e \lstinline{market}. 
-Per questo motivo viene applicata una conversione gzip al momento della generazione del dataset: lo script genera accanto al JSON una versione compressa che pesa circa 5,4MB. 
+Vista la dimensione elevata, viene applicata una conversione gzip al momento della generazione del dataset: lo script genera accanto al JSON una versione compressa che pesa circa 5,4MB.
 La versione gzip è quella effettivamente usata, lato client la decompressione avviene attraverso la libreria \lstinline{fflate}, in javascript puro.
 
 \subsubsection{Database locale}
@@ -49,10 +126,8 @@ SQLite su dispositivi mobili ha un limite di variabili che può gestire con un'u
 Per risolvere questo problema i dati vengono divisi in array da al massimo 500 elementi ciascuno.
 I dati vengono quindi inseriti un blocco alla volta all'interno del database in modo da evitare errori.
 
-L'evoluzione dello schema è gestita in maniera standard tramite migrazioni versionate, ovvero degli script sequenziali che modificano la struttura dei dati per adattarla ai requisiti del software.
-Queste migrazioni vengono generate in fase di sviluppo e applicate automaticamente all'avvio, prima di ogni accesso ai dati. 
-Un registro interno al database memorizza lo storico degli aggiornamenti assicurando che ogni migrazione venga applicata una sola volta.
-In questo modo se il database è già allineato all'ultima versione l'aggiornamento si conclude senza eseguire nessuna istruzione.
+L'evoluzione dello schema è gestita tramite migrazioni versionate, generate in fase di sviluppo e applicate automaticamente all'avvio prima di ogni accesso ai dati.
+Un registro interno assicura che ogni migrazione sia applicata una sola volta, così se il database è già allineato l'avvio non esegue alcuna istruzione.
 
 \subsubsection{Sincronizzazione lato applicazione}
 
@@ -71,8 +146,7 @@ All'avvio, dopo le migrazioni, l'app esegue la procedura di sincronizzazione, ch
 
 L'applicazione include un seed iniziale di dati impacchettati nel bundle per garantire l'usabilità anche in assenza di rete alla prima apertura. 
 Al primissimo avvio, se la tabella dei prezzi è vuota, il seed la popola. 
-Successivamente la sincronizzazione allinea il contenuto alla versione più recente. 
-Le tre fasi di sincronizzazione avvengono con frequenze diverse: le migrazioni sono verificate a ogni avvio ma applicate una sola volta, il seed viene eseguito solo a database vuoto, la sincronizzazione al più una volta al giorno.
+Successivamente la sincronizzazione allinea il contenuto alla versione più recente.
 
 \subsubsection{Limiti}
 Si espongono in questa sezione limiti progettuali dell'app.
@@ -88,11 +162,12 @@ ONNX è uno standard e serve a disaccoppiare il framework di addestramento dal m
 In questo modo è possibile far girare il modello in un ambiente React Native direttamente sul dispositivo.
 
 L'inferenza quindi avviene in locale utilizzando la libreria \lstinline{onnxruntime-react-native} che esegue il modello sulla CPU del dispositivo.
-Non è previsto alcun server di inferenza: i dati dell'utente non lasciano mai il dispositivo e l'intera app funziona anche offline.
+Non è previsto alcun server di inferenza, in linea con l'architettura local-first dell'app.
 
 
-Il file ONNX del modello è incluso come asset nel bundle dell'applicazione.
-All'avvio viene creata una sola sessione di inferenza che viene conservata in un singleton di modulo e riutilizzata per tutte le previsioni successive. 
+Sono stati addestrati tre modelli con target di volatilità 15,20 e 25\% e i loro file ONNX sono stati inclusi come assets nel bundle dell'applicazione.
+La scelta del target è salvata per singolo portafoglio e decide quale dei tre modelli viene eseguito, vale lo stesso per il target del metodo Target Volatility.
+La sessione di inferenza per ogni modello viene creata una sola volta, al primo utilizzo, e viene conservata in un singleton di modulo e riutilizzata per tutte le previsioni successive. 
 Il costo di caricamento del modello si paga quindi una volta sola, in background, senza bloccare l'interfaccia. 
 Un meccanismo di guardia impedisce inizializzazioni concorrenti.
 
@@ -108,3 +183,58 @@ Questa procedura è usata in due funzionalità diverse.
 Viene usata per l'allocazione in tempo reale quando l'utente applica il metodo al suo portafoglio facendo partire una previsione usando i dati più recenti.
 E viene usata anche per il backtest in cui il modello viene interrogato ad ogni ribilanciamento.
 
+\subsection{Motore di backtest}
+È stato implementato un motore di backtest walk-forward per simulare e confrontare fra loro le strategia di allocazzione proposte nell'app.
+Questo motore simula le decisioni che avrebbero fatto giorno per giorno le varie strategia utilizzando solo i dati passati.
+Quindi tutte le strategie ricevono un contesto di soli dati stroici e restituiscono i pesi target, in questo modo si garantisce un confronto equo in quanto i risultati dipenono solo dai pesi prodotti.
+
+Tutte le serie di dati vengono prima allineate sulle date comuni, così che ogni
+strategia lavori sullo stesso insieme di giorni. 
+La simulazione procede poi con un capitale iniziale normalizzato, dove i pesi rappresentano le frazioni investite
+e la quota rimasta resta in liquidità. Ad ogni passo:
+
+\begin{enumerate}
+  \item \textbf{Ribilanciamento} ogni $N$ giorni di borsa: alla strategia viene passata una finestra di soli dati
+  passati insieme allo stato corrente del portafoglio.
+  La strategia restituisce i pesi target.
+  \item \textbf{Costi di transazione}: si calcola il turnover, cioè la
+  somma delle variazioni di peso rispetto all'allocazione precedente, e si
+  addebita i costi di transazione derivanti. In questo
+  modo strategie che ribilanciano in modo più aggressivo vengono penalizzate
+  realisticamente.
+  \item \textbf{Evoluzione giornaliera}: si applica al capitale il rendimento del
+  portafoglio del giorno, $r_p = \sum_i w_i \, r_{i}$. Questo rendimento
+  non è visibile alla strategia ma viene calcolato dopo la decisione,
+  garantendo l'assenza di look-ahead.
+  \item \textbf{Drift dei pesi}: tra un ribilanciamento e l'altro i pesi non
+  restano fissi ma evolvono come in un buy-and-hold,i titoli che
+  crescono di più aumentano il proprio peso relativo secondo
+  $w_i \leftarrow w_i (1 + r_i) / (1 + r_p)$.
+\end{enumerate}
+
+Al termine, dal periodo di backtest si calcolano le metriche di
+valutazione: rendimento totale, rendimento annualizzato, volatilità annualizzata
+, Sharpe ratio, maximum drawdown e Calmar Ratio.
+
+\subsection{Validazione numerica}
+\label{subsec:validazione}
+
+
+
+Dato che l'intera logica quantitativa è stata re-implementata in TypeScript per
+girare sul dispositivo, è stato necessario verificare che i risultati coincidano
+con quelli dell'ambiente di riferimento in Python. 
+Si sono quindi messi a confronto gli output delle due implementazioni sugli stessi input.
+
+Le funzioni finanziarie e il motore di backtest sono stati confrontati con un'implementazione di riferimento basata su \lstinline{NumPy}. 
+Gli scostamenti rilevati sono dell'ordine $10^{-16}$.
+Le due implementazioni producono di fatto gli stessi risultati non contando gli errori di arrotondamento inevitabili. 
+
+Per l'agente si è confrontata l'inferenza on-device tramite ONNX Runtime con i pesi
+prodotti dal modello di riferimento in Python, sugli stessi dati storici.
+Lo scostamento mediano per singolo asset è risultato di circa $0{,}3$ punti percentuali. 
+Questa piccola differenza è dovuta alla precisione ridotta data dai dati in \lstinline{float32} sul dispositivo contro \lstinline{float64} in Python.
+Anche qui però la differenza è minima e trascurabile e di fatto l'esecuzione on-device replica fedelmente quella del modello addestrato.
+
+Si è dimostrato quindi che le decisioni prese dall'app sul dispositivo sono equivalenti a quelle calcolabili nell'ambiente
+di sviluppo.

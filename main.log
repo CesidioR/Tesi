@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.9)  30 SEP 2026 16:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.9)  30 SEP 2026 22:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -541,48 +541,49 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count336
 \@lastruleclass=\count337
 \@thisrulewidth=\dimen310
+) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen311
+\ar@mcellbox=\box70
+\extrarowheight=\dimen312
+\NC@list=\toks48
+\extratabsurround=\skip62
+\backup@length=\skip63
+\ar@cellbox=\box71
+)
+\TX@col@width=\dimen313
+\TX@old@table=\dimen314
+\TX@old@col=\dimen315
+\TX@target=\dimen316
+\TX@delta=\dimen317
+\TX@cols=\count338
+\TX@ftn=\toks49
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip62
-\multirow@cntb=\count338
-\multirow@dima=\skip63
-\bigstrutjot=\dimen311
-) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
-\col@sep=\dimen312
-\ar@mcellbox=\box70
-\extrarowheight=\dimen313
-\NC@list=\toks48
-\extratabsurround=\skip64
-\backup@length=\skip65
-\ar@cellbox=\box71
+\multirow@colwidth=\skip64
+\multirow@cntb=\count339
+\multirow@dima=\skip65
+\bigstrutjot=\dimen318
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip66
 \LTright=\skip67
 \LTpre=\skip68
 \LTpost=\skip69
-\LTchunksize=\count339
-\LTcapwidth=\dimen314
+\LTchunksize=\count340
+\LTcapwidth=\dimen319
 \LT@head=\box72
 \LT@firsthead=\box73
 \LT@foot=\box74
 \LT@lastfoot=\box75
 \LT@gbox=\box76
-\LT@cols=\count340
-\LT@rows=\count341
-\c@LT@tables=\count342
-\c@LT@chunks=\count343
-\LT@p@ftn=\toks49
-) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty
-Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
-\TX@col@width=\dimen315
-\TX@old@table=\dimen316
-\TX@old@col=\dimen317
-\TX@target=\dimen318
-\TX@delta=\dimen319
-\TX@cols=\count344
-\TX@ftn=\toks50
+\LT@cols=\count341
+\LT@rows=\count342
+\c@LT@tables=\count343
+\c@LT@chunks=\count344
+\LT@p@ftn=\toks50
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2025/01/14 v2.16e rotated objects in LaTeX
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/ifthen.sty
@@ -784,7 +785,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip75
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 123.
+Package hyperref Info: Option `colorlinks' set `true' on input line 125.
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \ttl@box=\box88
@@ -904,7 +905,7 @@ Package tocbasic Info: setting babel extension for `nls' on input line 188.
 \@nomenclaturefile=\write4
 \openout4 = `main.nlo'.
 
-Package nomencl Info: Writing nomenclature file main.nlo on input line 255.
+Package nomencl Info: Writing nomenclature file main.nlo on input line 257.
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/eso-pic/eso-pic.sty
@@ -930,7 +931,7 @@ File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
 Package: nowidow 2011/09/20 1.0 Easily prevent widows and orphans
 Package: nowidow 
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 287.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 289.
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -939,24 +940,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 287.
-LaTeX Font Info:    ... okay on input line 287.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 289.
+LaTeX Font Info:    ... okay on input line 289.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1011,13 +1012,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Redefining \microtypecontext on input line 287.
-Package microtype Info: Applying patch `item' on input line 287.
-Package microtype Info: Applying patch `toc' on input line 287.
-Package microtype Info: Applying patch `eqnum' on input line 287.
-Package microtype Info: Applying patch `footnote' on input line 287.
-Package microtype Info: Applying patch `verbatim' on input line 287.
-LaTeX Info: Redefining \microtypesetup on input line 287.
+LaTeX Info: Redefining \microtypecontext on input line 289.
+Package microtype Info: Applying patch `item' on input line 289.
+Package microtype Info: Applying patch `toc' on input line 289.
+Package microtype Info: Applying patch `eqnum' on input line 289.
+Package microtype Info: Applying patch `footnote' on input line 289.
+Package microtype Info: Applying patch `verbatim' on input line 289.
+LaTeX Info: Redefining \microtypesetup on input line 289.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1041,16 +1042,16 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count405
-Package tocbasic Info: setting babel extension for `lol' on input line 287.
-Package hyperref Info: Link coloring ON on input line 287.
+Package tocbasic Info: setting babel extension for `lol' on input line 289.
+Package hyperref Info: Link coloring ON on input line 289.
  (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
-<figs/Unibo_Logo.png, id=241, 185.0112pt x 133.6995pt>
+<figs/Unibo_Logo.png, id=265, 185.0112pt x 133.6995pt>
 File: figs/Unibo_Logo.png Graphic file (type png)
 <use figs/Unibo_Logo.png>
-Package pdftex.def Info: figs/Unibo_Logo.png  used on input line 295.
+Package pdftex.def Info: figs/Unibo_Logo.png  used on input line 297.
 (pdftex.def)             Requested size: 184.95145pt x 133.73792pt.
  [1
 
@@ -1102,11 +1103,14 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [5])
+) [5] [6{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}])
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [6{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] (./main.lof
+ [7] [8
+
+
+] (./main.lof
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6.
  (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1119,10 +1123,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [7
-
-
-] [8
+ [9] [10
 
 
 ] (./main.lot
@@ -1134,7 +1135,7 @@ Overfull \hbox (2.36395pt too wide) in paragraph at lines 10--10
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [9{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [10
+ [11{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [12
 
 
 ]
@@ -1188,7 +1189,7 @@ Chapter 4.
 
 
 ] [1] [2]
-<architettura.pdf, id=573, 751.60799pt x 858.62529pt>
+<architettura.pdf, id=623, 751.60799pt x 858.62529pt>
 File: architettura.pdf Graphic file (type pdf)
 <use architettura.pdf>
 Package pdftex.def Info: architettura.pdf  used on input line 88.
@@ -1235,7 +1236,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-<frontier_mdd.pdf, id=741, 859.00145pt x 266.75189pt>
+<frontier_mdd.pdf, id=792, 859.00145pt x 266.75189pt>
 File: frontier_mdd.pdf Graphic file (type pdf)
 <use frontier_mdd.pdf>
 Package pdftex.def Info: frontier_mdd.pdf  used on input line 60.
@@ -1244,7 +1245,7 @@ Package pdftex.def Info: frontier_mdd.pdf  used on input line 60.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1]
-<equity_curve.pdf, id=747, 712.17221pt x 366.3576pt>
+<equity_curve.pdf, id=798, 712.17221pt x 366.3576pt>
 File: equity_curve.pdf Graphic file (type pdf)
 <use equity_curve.pdf>
 Package pdftex.def Info: equity_curve.pdf  used on input line 107.
@@ -1256,7 +1257,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4] [5]
-<regime_loss.pdf, id=887, 565.81064pt x 320.16394pt>
+<regime_loss.pdf, id=937, 565.81064pt x 320.16394pt>
 File: regime_loss.pdf Graphic file (type pdf)
 <use regime_loss.pdf>
 Package pdftex.def Info: regime_loss.pdf  used on input line 226.
@@ -1270,12 +1271,12 @@ Overfull \hbox (13.46738pt too wide) in paragraph at lines 282--283
  []
 
 [7] [8] [9]
-<alloc_covid.pdf, id=962, 437.6626pt x 308.29636pt>
+<alloc_covid.pdf, id=1013, 437.6626pt x 308.29636pt>
 File: alloc_covid.pdf Graphic file (type pdf)
 <use alloc_covid.pdf>
 Package pdftex.def Info: alloc_covid.pdf  used on input line 403.
 (pdftex.def)             Requested size: 218.51521pt x 153.9267pt.
-<alloc_2022.pdf, id=963, 437.18958pt x 308.13266pt>
+<alloc_2022.pdf, id=1014, 437.18958pt x 308.13266pt>
 File: alloc_2022.pdf Graphic file (type pdf)
 <use alloc_2022.pdf>
 Package pdftex.def Info: alloc_2022.pdf  used on input line 409.
@@ -1285,26 +1286,25 @@ Package pdftex.def Info: alloc_2022.pdf  used on input line 409.
 
 ]
 Chapter 6.
-(./Applicazione.tex
-Overfull \hbox (25.2814pt too wide) in paragraph at lines 7--8
+(./Applicazione.tex [0
+
+]
+Overfull \hbox (25.2814pt too wide) in paragraph at lines 84--85
 []\T1/lmr/bx/n/12 (-20) Costo nullo di in-fras-trut-tura\T1/lmr/m/n/12 (-20) : non es-sendoci un back-end da man-tenere, l'aggiornamento
  []
 
-[0
-
-]
-<er_diagram.pdf, id=1084, 640.31218pt x 369.29968pt>
+[1]
+<er_diagram.pdf, id=1140, 640.31218pt x 391.4625pt>
 File: er_diagram.pdf Graphic file (type pdf)
 <use er_diagram.pdf>
-Package pdftex.def Info: er_diagram.pdf  used on input line 38.
-(pdftex.def)             Requested size: 432.48051pt x 249.44121pt.
+Package pdftex.def Info: er_diagram.pdf  used on input line 115.
+(pdftex.def)             Requested size: 432.48051pt x 264.41095pt.
+ [2] [3 <./er_diagram.pdf>] [4] [5]
+Overfull \hbox (10.43794pt too wide) in paragraph at lines 229--232
+[]\T1/lmr/m/n/12 (-20) Le fun-zioni fi-nanziarie e il mo-tore di back-test sono stati con-frontati con un'implementazione
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1]
-Underfull \vbox (badness 2626) has occurred while \output is active []
-
- [2 <./er_diagram.pdf>] [3]) [4]
+) [6]
 Chapter 7.
 (./Formule.tex [0
 
@@ -1335,21 +1335,21 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C683C7B4A9A1A9D95B8FEB8A382DFAB7;10205.
+(rerunfilecheck)             Checksum: 53D75F44E185ED44917DE37D7111437D;11297.
  ) 
 Here is how much of TeX's memory you used:
- 37139 strings out of 469006
- 714492 string characters out of 5454814
+ 37173 strings out of 469006
+ 714961 string characters out of 5454814
  1400398 words of memory out of 5000000
- 64596 multiletter control sequences out of 15000+600000
+ 64611 multiletter control sequences out of 15000+600000
  768551 words of font info for 286 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  110i,14n,107p,1052b,2695s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on main.pdf (68 pages, 909953 bytes).
+Output written on main.pdf (72 pages, 919986 bytes).
 PDF statistics:
- 1474 PDF objects out of 1728 (max. 8388607)
- 1015 compressed objects within 11 object streams
- 280 named destinations out of 1000 (max. 500000)
- 76301 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 1540 PDF objects out of 1728 (max. 8388607)
+ 1077 compressed objects within 11 object streams
+ 299 named destinations out of 1000 (max. 500000)
+ 76349 words of extra memory for PDF output out of 89155 (max. 10000000)
 
