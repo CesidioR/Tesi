@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+Warning--can't use both volume and number fields in wang2021deeptrader
+You've used 16 entries,
+            2773 wiz_defined-function locations,
+            686 strings with 7940 characters,
+and the built_in function-call counts, 8219 in all, are:
+= -- 713
+> -- 532
+< -- 7
++ -- 178
+- -- 162
+* -- 706
+:= -- 1254
+add.period$ -- 50
+call.type$ -- 16
+change.case$ -- 102
+chr.to.int$ -- 16
+cite$ -- 33
+duplicate$ -- 356
+empty$ -- 646
+format.name$ -- 184
+if$ -- 1712
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 15
+newline$ -- 90
+num.names$ -- 64
+pop$ -- 203
+preamble$ -- 1
+purify$ -- 86
+quote$ -- 0
+skip$ -- 281
+stack$ -- 0
+substring$ -- 305
+swap$ -- 43
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 176
+warning$ -- 1
+while$ -- 68
+width$ -- 0
+write$ -- 214
+(There was 1 warning)

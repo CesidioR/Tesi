@@ -1,0 +1,150 @@
+% !TEX root = main.tex
+%=============================================================
+% CHAPTER 1: INTRODUCTION
+%=============================================================
+
+Il position sizing, ovvero la decisione di quanto capitale investire in un dato titolo e momento, costituisce 
+una variabile importantissima per la preservazione del capitale e la stabilità dei rendimenti nel lungo periodo.
+Un guadagno molto grande derivato da un titolo su cui abbiamo investito una quantità piccola del nostro capitale risulterà essere marginale nel valore complessivo del portafoglio.
+Mentre allocare gran parte del capitale su un titolo che è molto instabile potrebbe compromettere l'intero portafoglio.
+Per questo motivo è molto importante spartire il proprio capitale in maniera sensata nel momento in cui si va a investire.
+Nel lavoro di \citet{blotnick2025power} si affrontano alcuni problemi che possono incorrere quando si prova a fare position sizing affidandosi al puro intuito, come:
+\begin{itemize}
+    \item \textbf{Eccesso di fiducia}: porta a concentrare eccessivamente il capitale sui titoli che si è convinti vadano bene, sottostimando le probabilità di crollo.
+    \item \textbf{Avversione alle perdite}: è la tendenza a vendere le proprie posizioni in profitto per incassare il prima possibile il guadagno, lasciando d'altra parte ferme le posizioni in perdita sperando in un recupero aumentandone così il peso complessivo nel portafoglio.
+    \item \textbf{Pregiudizio di recency}: è ciò che induce a investire di più in fasi rialziste prolungate e a disinvestire drasticamente nei ribassi successivi.
+\end{itemize}
+
+Per evitare questi problemi, la ricerca finanziaria ha sviluppato metodologie di dimensionamento della posizione.
+I primi approcci sono stati quelli a capitale fisso come l'Equal Weight in cui si divide semplicemente il capitale equamente fra i titoli scelti.
+Questi metodi sono molto semplici e addirittura profittevoli ma non offrono alcuna protezione dai rischi di crollo del mercato.
+Il mercato azionario infatti è contrassegnato da repentini cambiamenti di stato e dalla tendenza della volatilità a persistere nel tempo.
+Osservando questa struttura è diventato necessario sviluppare metodologie di posizionamento dinamiche guidate dal rischio.
+Questo lavoro si è basato sulla formula del volatility targeting proposta da Moreira e Muir~\cite{moreira2017volatility}. Essa scala l'esposizione al mercato in proporzione inversa alla volatilità stimata
+cioè investe nei periodi in cui la volatilità è bassa e ritorna in liquidità nei momenti in cui quest'ultima si alza.
+
+\section{Stato dell'arte}
+\label{subsec:stateofart}
+Durante gli anni la gestione del portafoglio ha attraversato una profonda evoluzione. 
+Si è partiti da modelli analitici statici fino ad arrivare ad architetture adattive basate sull'intelligenza artificiale.
+Tradizionalmente l'allocazione del capitale si è fondata su modelli di ottimizzazione media-variana di Markowitz, essi consistevano nel capire quanta percentuale di capitale investire in ongi titolo in base alla media dei rendimenti attesi e alla loro volatilità, cercando l'allocazione ottimale che massimizzi la prima e minimizzi la seconda.
+In seguito si è evoluta verso politiche focalizzate sulla gestione del rischio come il Volatility Targeting.
+Queste formule hanno riscontrato un grande successo in quanto sono trasparenti è facile capire il perché delle loro azioni, e si sono dimostrate molto efficienti nell'obiettivo di proteggere il capitale.
+Tuttavia esse si basano su regole fisse che non riescono ad'adattarsi dinamicamente ai velocissimi cambi di regime del mercato.
+Per far fronte a questo problema negli ultimi dieci anni la ricerca si è mossa verso l'applicazione del Deep Reinforcement Learning (DRL).
+Questa a differenza dell'apprendimento supervisionato non tenta di prevedere le direzioni future del mercato che si è dimostrato inefficace, 
+ma fa si che un'agente agisca direttamente con l'ambiente di mercato apprendendo una politica di allocazione tramite tentativi ed errori per massimizzare un segnale di reward, quest'ultimo tipicamente basato su metriche corrette per il rischio come lo Sharpe o il Calmar.
+Attualmente lo standard impiega algoritmi Actor-Critic come il Proximal Policy Optimization (PPO), per gestire lo spazio di azioni continue richiesto
+per calibrare i pesi di un portafoglio. I modelli come DeepTrader\citep{wang2021deeptrader} e MARS \citep{chen2026mars} rappresentano la frontiera di questo approccio integrando l'estrazione di feature macroeconomiche e indicatori di rischio direttamente all'interno dello stato osservato dall'agente, questo nel tentativo di rendere l'agente consapevole delle turbolenze presenti in ogni momento nel mercato.
+Purtroppo però l'attuale stato dell'arte è dominato da architetture monolitiche end-to-end, ovvero architetture enormi che prendono i dati grezzi e forniscono direttamente in output il vettore di allocazione dei pesi. 
+In questo modo però non è possibile identificare con precisione la reale aggiunta dell'aprendimento rendendo impossibile quantificare e giustificare un miglioramento dato da un modello rispetto alle normali formule fisse.
+
+
+%-------------------------------------------------------------
+\section{Definizione del problema}
+\label{sec:problem}
+%-------------------------------------------------------------
+
+Nonostante al giorno d'oggi vengano pubblicati innumerevoli studi su architetture di Deep Reinforcement Learning per l'allocazione dinamica del portafoglio.
+La letteratura della finanza quantitativa soffre di una mancaza di rigore metodologico nella fase di validazione e test.
+Molti di questi studi infatti tendono a riportare solo dei singoli scenari di backtest in cui l'agente batte il benchmark fissato.
+Questa impostazione però presenta dei punti critici che sono invece stati toccati in questo lavoro:
+\begin{itemize}
+    \item \textbf{Scelta dei benchmark}: Molto spesso il confronto avviene solo con strategie 
+    passive come l'equal-weight o il buy\&hold, e quasi mai a parità di rischio. Per avere dei risultati legittimi il benchmark dovrebbe essere ovviamente coerenrte
+    con l'obiettivo del modello ma è importe anche che sia confrontato a parità di rischio. Questo confronto equo permette di capire meglio se le performance dei vari modelli siano
+    gonfiate o meno dal fatto che assumano un rischio maggiore nelle loro allocazioni.
+    \item \textbf{Varianza e seed multipli}: I risultati sono spesso presentati con un unico backtest vincente senza esplicitare che siano stati fatti test con più seed.
+    Quando si vanno a fare molti backtest provando diverse combinazioni di parametri e paniere è possibile che per puro caso si sia incontrata una configurazione vincente, ma che poi essa non lo sia altrettanto testandola fuori campione.
+    Senza avere dati da più backtest e seed che ci indicano quanto sia stabile il modello non possiamo dire se sia stato fatta una scelta del migliore o meno.
+    \item \textbf{Ablation dello spazio di azione}: L'agente è quasi sempre una rete monolitica end-to-end e manca un test che isoli il contributo della componente appresa, ovvero che la confronti con una regola semplice, non appresa, capace di svolgere la stessa funzione. Senza questo controllo non è possibile stabilire se il vantaggio derivi davvero dall'apprendimento o da un effetto banale.
+\end{itemize}
+
+Per dimostrare la veridicità di questa affermazione sono stati presi 5 paper che si avvicinano al modello implementato in questo lavoro.
+Questi documenti sono stati analizzati per vedere se le criticità riportate di sopra sono presenti almeno in parte in essi.
+Di sotto si riporta una tabella che sintetizza i risultati di questa ricerca:
+
+
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\label{tab:sota-critica-affini}
+\begin{tabular}{p{4.3cm} p{2.4cm} p{2.3cm} p{2.4cm}}
+\toprule
+\textbf{Paper / Autori} & \textbf{Benchmark a parità di rischio?} & \textbf{Multi-seed?} & \textbf{Ablation?} \\
+\midrule
+Zhang, Zohren \& Roberts (2020) & Sì (vol scaling 10\%) & Non spec.\ & Parziale \\
+DeepTrader --- Wang et al.\ (2021) & No & Non spec.\ & Sì (interna) \\
+Jung \& Oh (2025) & No & No (seed 42) & Sì (interna) \\
+Lwele et al.\ (2025) & No & Non spec.\ & No \\
+MARS --- Chen, Li \& Wang (2026) & No & No (seed 42) & Sì (interna) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Da questa ricerca emergono tre osservazioni principali.
+\begin{enumerate}
+    \item In nessuno dei cinque lavori è citato un addestramento su più seed
+    indipendenti con medie e intervalli di confidenza; l'unico che fa qualcosa di
+    simile è \citet{jung2025factor}, con un ricampionamento Moving-Block Bootstrap
+    ex-post.
+    \item Gli studi di ablation compaiono nei lavori
+    \citep{wang2021deeptrader, jung2025factor, chen2026mars}, ma restano interni:
+    isolano quale componente, reward o architettura contribuisca, senza però
+    confrontare la componente appresa con una regola semplice, non appresa, capace
+    di svolgere la stessa funzione.
+    \item Solo \citet{zhang2020deeplearning} applica un confronto a parità di
+    rischio, normalizzando in modo uniforme la volatilità di tutti i modelli e
+    garantendo così la parità del budget di rischio nel confronto.
+\end{enumerate}
+
+
+Alcuni casi sono particolarmente istruttivi. \citet{lwele2025riskaware} mostra come dopo l'addestramento le prestazioni collassano (Sharpe da $1.41$ a $0.13$),
+perché l'agente si limita a tagliare la volatilità perdendo rendimento, pura conservatività, per giunta aggravato da un evidente look-ahead bias nella
+selezione del paniere. \citet{wang2021deeptrader} e \citet{chen2026mars} sono i più
+simili a questo lavoro, hanno una reward orientata al drawdown e un de-risking guidato
+dallo stato del mercato. La loro ablation però resta interna non isolando il contributo
+dell'apprendimento rispetto a una regola. \citet{jung2025factor} è il più trasparente, ammette che nel mercato delle criptovalute
+la sovraperformance non sopravvive alla verifica bootstrap.
+
+
+
+
+
+
+
+\subsection{Obiettivi e limiti}
+\label{subsec:scope}
+
+\subsubsection{Obiettivo primario}
+Dopo aver essplorato queste mancanze presenti in molti lavori della finanza quantitativa si è definito lo scopo di questo lavoro.
+L'obiettivo è esplorare i limiti effettivi dell'intelligenza artificiale nel position sizing, in particolare nel regolare l'esposizione del capitale al mercato.
+La domanda di questa ricerca non è se una rete riesce a battere il mercato ma bensì:
+
+\emph{"La componente appresa agigunge valore rispetto a una regola strutturale fissa nella decisione dell'esposizione?"}
+
+Per rispondere in maniera rigorosa adottiamo i controlli che nei lavori esaminato non compaiono, spiegati nel dettaglio nei prossimi capitoli.
+
+
+
+\subsubsection{Limiti}
+Tutte le conclusioni in questo lavoro valgono all'interno di confini precisi.
+L'universo di riferimento è quello dei titoli large-cap dell'indice S\&P500, cioè le 500 aziende americane con il valore economico più grande.
+La selezione dei titoli è congelata a equal-weight isolando in questo modo la sola decisione di esposizione.
+L'obiettivo è il contenimento del drawdown non massimizzare il rendimento.
+La valutazione è confinata ai periodi e ai regimi di mercato considerati.
+I risultati vanno quindi letti come un caso illustrativo di un principio generale e non come un verdetto universale sull'intelligenza artificiale in finanza.
+Su mercati
+strutturalmente meno efficienti (small-cap, mercati emergenti, cripto-attività), o
+in problemi dove la selezione cross-asset è determinante, il margine per
+l'apprendimento potrebbe riaprirsi.
+
+\subsubsection{Obiettivo secondario}
+Oltre all'obiettivo citato di sopra in questo lavoro è resente anche un secondo obiettivo che implementa una componente applicativa.
+Quest'obiettivo consiste nella realizzazione di un'applicazione per la gestione del portafoglio che integra il modello studiato, rendendolo utilizzabile in modo concreto.
+La sua architettura e implementazione sono descritte nel dettaglio nel capitolo %~\ref{cap:applicazione}
+
+
+

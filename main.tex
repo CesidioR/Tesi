@@ -1,0 +1,442 @@
+% Mayuresh Vrushabhanath Pachore Thesis 2025-2026
+
+% ===============================
+% Document Class
+% ===============================
+\documentclass[12pt,a4paper,twoside]{book}
+
+% ===============================
+% Encoding & Language
+% ===============================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% ===============================
+% Page Layout
+% ===============================
+\usepackage{geometry}
+\geometry{
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm
+}
+
+\usepackage{setspace}
+\onehalfspacing % or \doublespacing if required
+
+\usepackage{indentfirst}
+\usepackage{pdflscape}
+
+% ===============================
+% Fonts
+% ===============================
+\usepackage{lmodern}        % Improved Computer Modern
+\usepackage{microtype}      % Better typography
+
+% ===============================
+% Mathematics
+% ===============================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{bm}             % Bold math symbols
+\usepackage{mathtools}
+
+% ===============================
+% Graphics & Figures
+% ===============================
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+% ===============================
+% Tables
+% ===============================
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{rotating}  % Per tabelle orizzontali (sidewaystable)
+\usepackage{float}     % Per lo specificatore posizionale [H]
+
+% ===============================
+% Algorithms & Code
+% ===============================
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{TypeScript}{
+  keywords={abstract, any, as, async, await, boolean, break, case, catch, class, console,
+    const, constructor, continue, debugger, declare, default, delete, do, else, enum,
+    export, extends, false, finally, for, from, function, get, if, implements, import, in,
+    instanceof, interface, is, keyof, let, module, namespace, new, null, number, object,
+    package, private, protected, public, readonly, require, return, set, static, string,
+    super, switch, symbol, this, throw, true, try, type, typeof, undefined, var, void,
+    while, with, yield},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  morestring=[b]`
+}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true
+}
+
+
+% ===============================
+% Units & Symbols
+% ===============================
+\usepackage{siunitx}
+\sisetup{
+    per-mode=symbol,
+    detect-all
+}
+
+% ===============================
+% Hyperlinks
+% ===============================
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+
+% ===============================
+% Chapter/Section appearance  (PUT THIS HERE)
+% ===============================
+\usepackage{titlesec}
+
+% Chapters: small "Chapter X", big title, better spacing
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\Large\chaptername\ \thechapter}
+  {5ex}
+  {\huge}
+
+
+
+% ===============================
+% Headings & TOC
+% ===============================
+\usepackage{chngcntr} % for \counterwithin
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% -----------------------
+% Marks (chapter/section)
+% -----------------------
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+% -----------------------
+% Header
+% -----------------------
+% Left: current chapter/section
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+
+% Right: page number (2.1, 2.2 ...)
+\fancyhead[R]{\small\thepage}
+
+% -----------------------
+% Footer
+% -----------------------
+
+% Odd pages -> thesis title on left
+\fancyfoot[L]{%
+\ifodd\value{page}
+\footnotesize \textit{\ThesisTitle}
+\fi
+}
+
+% Even pages -> course/university on right
+\fancyfoot[R]{%
+\ifodd\value{page}
+\else
+\footnotesize \CourseUniversity
+\fi
+}
+
+% -----------------------
+% Lines
+% -----------------------
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% -----------------------
+% First page of chapters
+% -----------------------
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+% -----------------------
+% Unnumbered chapters
+% -----------------------
+\fancypagestyle{chapterstar}{
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{chapterplain}{
+\fancyhf{}
+\fancyfoot[L]{\footnotesize \CourseUniversity}
+\fancyfoot[R]{\footnotesize \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+}
+
+\fancypagestyle{chapternum}{
+  \fancyhf{}
+
+  % Header
+  \fancyhead[L]{\small\rightmark}
+  \fancyhead[R]{\small\thepage}
+
+  % Footer
+  \fancyfoot[R]{%
+    \ifodd\value{page}
+      \footnotesize \textit{\ThesisTitle}
+    \fi
+  }
+
+  \fancyfoot[L]{%
+    \ifodd\value{page}
+    \else
+      \footnotesize \CourseUniversity
+    \fi
+  }
+
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+\usepackage[round]{natbib}
+
+
+% ===============================
+% Appendices
+% ===============================
+\usepackage{appendix}
+
+% ===============================
+% Nomenclature / Acronyms
+% ===============================
+\usepackage{nomencl}
+\makenomenclature
+
+% \usepackage[acronym]{glossaries}
+% \makeglossaries
+
+% ===============================
+% PDF Inclusion
+% ===============================
+\usepackage{pdfpages}
+
+% ===============================
+% Line Breaking & Widow Control
+% ===============================
+\usepackage[all]{nowidow}
+
+% ===============================
+% Custom Commands (optional)
+% ===============================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\newcommand{\AuthorName}{\textit{Cesidio Rosica}}
+\newcommand{\ThesisTitle}{Deep Reinforcement Learning e volatility targeting}
+\newcommand{\CourseUniversity}{Laurea Triennale in Informatica, DISI, Universit\`a di Bologna}
+
+\setlength{\headheight}{14pt}
+
+% ===============================
+% End of Preamble
+% ===============================
+
+
+\begin{document}
+
+    %Only for title page 
+    \setlength{\parindent}{15pt}
+    \setlength{\parskip}{15mm}
+    
+    \begin{titlepage}
+        \begin{center}
+            \includegraphics[width=6.5cm,height=4.7cm]{figs/Unibo_Logo.png}
+        
+            {\large{\bf{Dipartimento di Informatica - Scienza e Ingegneria - DISI }}}
+        
+            {\Large{\bf{Tesi di Laurea Triennale}}}
+        
+            {\bfseries\fontsize{20pt}{20pt}\selectfont
+                \setlength{\lineskip}{2pt}%
+                \setlength{\lineskiplimit}{0pt}%
+                Deep Reinforcement Learning e volatility targeting nella gestione dinamica dell'esposizione: un'analisi dei limiti dell'apprendimento\par}
+            
+        \end{center}
+        
+        \begin{minipage}[t]{0.5\textwidth}
+            {\Large{\bf Relatore: \\ Prof. Federico Montori}}
+            \vspace{6mm}
+
+            
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{0.40\textwidth}\raggedleft
+            {\Large{\bf Candidato: \\ Cesidio Rosica}}
+        \end{minipage}
+
+        \rule[0.5mm]{15.3845cm}{0.4mm}
+        \vspace{-\baselineskip}
+        \begin{center}
+            {\large\bfseries Mese Sessione di Laurea Ottobre\\}
+            {\large\bfseries Anno Accademico 2025/2026}
+        \end{center}
+
+    \end{titlepage}
+    \clearpage{\pagestyle{empty}\cleardoublepage}
+
+    \pagenumbering{roman} %page numbering is roman letters for this section
+    \setlength{\parindent}{15pt}
+    \setlength{\parskip}{0pt}
+    
+
+        
+	\chapter*{Riassunto}
+    \addcontentsline{toc}{chapter}{Riassunto}
+    \thispagestyle{chapterstar}
+	\label{abstract_It}
+	\input{Abstract_It.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	
+	
+
+    \pagestyle{chapterstar}
+    \chapter*{Acknowledgment}
+    \addcontentsline{toc}{chapter}{Acknowledgment}
+    \thispagestyle{chapterstar}
+	\label{acknow}
+	\input{Acknowledgment}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	
+		
+	
+	%table of contents
+    \tableofcontents
+    \thispagestyle{chapterstar}
+    \clearpage
+    \pagestyle{fancy}
+    \cleardoublepage
+
+    \addcontentsline{toc}{chapter}{List of Figures}
+	\listoffigures
+    \thispagestyle{chapterstar}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+
+    \listoftables
+    \thispagestyle{chapterstar}
+    \addcontentsline{toc}{chapter}{List of Tables}
+    \clearpage{\pagestyle{empty}\cleardoublepage}
+
+    
+
+    \mainmatter 
+    \pagestyle{chapternum}
+    
+    \pagenumbering{arabic}
+    \counterwithin{page}{chapter}
+    \renewcommand{\thepage}{\thechapter.\arabic{page}}
+    
+	\chapter{Introduzione}
+    \thispagestyle{chapterplain}
+	\label{chap:introduction}
+	\input{Introduzione.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	
+    \chapter{Fondamenti Teorici}
+    \thispagestyle{chapterplain}
+	\label{chap:backgrounds}
+	\input{Fondamenti_teorici.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+   
+    \chapter{Progettazione dataset e metodologia sperimentale}
+    \thispagestyle{chapterplain}
+	\label{chap:datasetemetodi}
+	\input{DatasetMetodi.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+		
+    
+   
+    
+    \chapter{Implementazione modello}
+    \thispagestyle{chapterplain}
+	\label{chap:modello}
+	\input{Modello.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+
+   
+
+    \chapter{Esperimenti e Risultati}
+    \thispagestyle{chapterplain}
+    \label{chap:esperimenti}
+    \input{EsperimentiRisultati.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+
+    
+	\chapter{Applicazione Mobile}
+    \thispagestyle{chapterplain}
+    \label{chap:applicazione}
+	\input{Applicazione.tex}
+
+     \chapter{Formule}
+    \thispagestyle{chapterplain}
+	\label{chap:Formule}
+	\input{Formule.tex}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+
+	\chapter{Conclusioni}
+    \thispagestyle{chapterplain}
+    \label{chap:conclusioni}
+	\input{Conclusioni.tex}
+
+    
+    \pagestyle{plain}
+    \cleardoublepage
+    \setcounter{page}{1}
+    \renewcommand{\thepage}{B\arabic{page}}
+    \bibliographystyle{plainnat}
+    \addcontentsline{toc}{chapter}{Bibliography}
+    \bibliography{references}
+
+\end{document}
+

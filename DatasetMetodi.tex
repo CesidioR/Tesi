@@ -1,0 +1,159 @@
+% !TEX root = main.tex
+
+\section{Progettazione del dataset}
+\label{sec:dataset}
+
+\subsection{Fonte e universo}
+I dati di mercato sono stati scaricati da Yahoo Finance tramite la libreria \texttt{yfinance} con l'opzione \texttt{auto\_adjust=True}. 
+Questa opzione fornisce i dati già aggiustati per split e dividendi su base giornaliera in modo da evitare che il modello percepisca delle crisi quando in realtà è solo l'effetto causato da questi ultimi.
+Nel dataset sono presenti titoli large-cap del mercato americano, cioè titoli che rappresentano un mercato molto liquido ed efficiente.
+Nello specifico i titoli nel dataset costituiscono l'S\&P500, un indice azionario che raggruppa le 500 aziende a maggiore capitalizzazione e rilevanza economica degli Stati Uniti.
+Il dataset contiene uno storico di questi titoli che va dal 2000 al 2026.
+Per ogni titolo sono presenti su base giornaliera quattro valori:
+\begin{enumerate}
+    \item \textbf{high}: massimo prezzo raggiunto dall'asset nella giornata
+    \item \textbf{low}: minimo prezzo raggiunto dall'asset nella giornata
+    \item \textbf{close}: prezzo di chiusura della giornata per quell'asset
+    \item \textbf{vix}: indice di paura del mercato condiviso fra tutti i titoli
+\end{enumerate}
+
+È importante specificare che il dataset è composto solo dalle aziende che fanno parte attualmente dell'S\&P500. Non compaiono quindi tutte quelle società che sono uscite dall'indice per fallimento dal 2000 a oggi.
+Questo è un limite accettato in quanto l'obiettivo non è la valutazione dei rendimenti ma un confronto fra strategie che operano sullo stesso paniere.
+
+
+\subsection{Feature e loro selezione}
+La scelta di avere nel dataset solo questi quattro indicatori si è consolidata man mano che il modello veniva testato.
+All'inizio si era partiti da un grande insieme di indicatori tecnici generati tramite la libreria di FinRL; successivamente, attraverso varie ablation, si è arrivati a questo insieme minimale.
+Infatti l'ablation ha dimostrato che la decisione è dominata dalla volatilità e che la maggior parte di questa moltitudine di indicatori non aggiungeva alcuna informazione utile a stimarla con precisione più di quanto non facessero i 4 indicatori definitivi.
+
+
+\subsection{Suddivisione dei dati}
+La suddivisione dei dati per training, validation e test set è temporale. 
+Questo per evitare che durante la simulazione di trading il modello abbia accesso a dei dati futuri rispetto al momento simulato in cui si trova.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Insieme & Periodo & Uso \\
+\midrule
+Training     & 2000-01-01 -- 2012-01-01 & stima dei parametri della rete \\
+Validazione  & 2012-01-01 -- 2015-01-01 & selezione/controllo del modello \\
+Test (out-of-sample) & 2015-01-01 -- 2026-02-01 & valutazione finale \\
+\bottomrule
+\end{tabular}
+\caption{Suddivisione temporale del dataset.}
+\label{tab:split}
+\end{table}
+
+Tutti i risultati riportati si riferiscono al periodo di test, mai
+osservato durante l'addestramento. I panieri operativi per gli esperimenti sul valore della parte appresa sono composti da 10
+titoli per universo. Per la parte di test sulla generalità sono stati usati panieri che si differenziano tra loro per caratteristiche e numero di asset.
+
+
+% ==========================================================================
+\section{Metodologia sperimentale}
+\label{sec:metodi}
+
+\subsection{Strategia appresa e formula di riferimento}
+La decisione del modello è l'esposizione del capitale al mercato. 
+La quota che sceglie di non tenere in liquidità viene poi ripartita equamente tra i titoli del paniere fornito in input.
+L'esposizione si basa su un overlay di volatility targeting:
+\[
+  e_t \;=\; m_\theta \cdot \underbrace{\left(\frac{\sigma_{\text{target}}}{\sigma_{\text{mkt},t}}\right)^{p}}_{\text{volatility targeting}},
+\]
+
+dove $\sigma_{\text{mkt},t}$ è la volatilità realizzata del mercato,
+$\sigma_{\text{target}}$ la volatilità obiettivo, $m_\theta$ il moltiplicatore
+appreso e $p$ l'esponente. La formula fissa ($m_\theta=1$, $p$ costante) è il
+riferimento non appreso rispetto al quale si misura ogni componente adattiva.
+
+\subsection{Funzione di reward}
+L'addestramento del modello tramite PPO ha l'obiettivo di massimizzare una reward che unisce rendimento e controllo del rischio. 
+La reward usata \textbf{DD\_VOL\_PENALTY} è il rendimento logaritmico del portafoglio al quale vengono sottratte due penalità:
+\begin{equation}
+r_t = \underbrace{\ln\!\frac{V_t}{V_{t-1}}}_{\text{crescita}}
+      \; - \; \underbrace{\lambda_{dd}\,\mathrm{DD}_t^{\,\alpha}}_{\text{penalità drawdown}}
+      \; - \; \underbrace{\lambda_{vol}\, e_t\, \sigma_{\mathrm{mkt},t}}_{\text{penalità esposizione}\times\text{vol}} .
+\end{equation}
+
+Il primo termine è il rendimento logaritmico dello step, che viene sommato a quello precedente durante tutto l'episodio e insieme formano la crescita logaritmica totale del capitale.
+Il secondo termine penalizza il drawdown dello step corrente $DD_t$ elevato a un esponente $\alpha = 1,5$. 
+Il valore di $\alpha$ è stato scelto in modo da far crescere la penalità man mano che il drawdown si aggrava, dando poca urgenza alle perdite superficiali e molta a quelle profonde.
+Il terzo termine penalizza l'esposizione $e_t$ in proporzione alla volatilità di mercato, rendendo esplicito il legame rischio/esposizione e facendo in modo che il modello non debba scoprire per tentativi che è da evitare una grande esposizione nei periodi di alta volatilità.
+I pesi usati sono
+$\lambda_{\text{dd}}=0.01$ e $\lambda_{\text{vol}}=0.002$.
+
+\subsection{Protocollo di valutazione}
+Ogni modello è valutato con un backtest statico sul periodo di test. I pesi vengono ricalcolati a ogni
+passo applicando i costi di transazione. I backtest sono stati fatti su periodi che rappresentano vari regimi di mercato:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Regime & Periodo & Caratterizzazione \\
+\midrule
+Test completo & 2015-01-01 -- 2026-02-01 & campione out-of-sample lungo \\
+2017 & 2017-01-01 -- 2017-12-31 & mercato calmo/rialzista \\
+COVID & 2020-02-01 -- 2020-08-31 & crash rapido e rimbalzo \\
+2022 & 2022-01-01 -- 2022-12-31 & ribasso lento e prolungato \\
+2025 & 2025-02-01 -- 2026-02-01 & sell-off dei dazi (apr 2025) \\
+\bottomrule
+\end{tabular}
+\caption{Regimi di valutazione.}
+\label{tab:regimi}
+\end{table}
+
+Per ogni configurazione si addestrano più seed (42, 43, 44) e si riporta
+la mediana tra i seed. Questo perché gli esperimenti preliminari hanno
+mostrato che seed diversi possono dare esiti sensibilmente diversi, quindi la
+robustezza al seed è parte del protocollo.
+
+\paragraph{Confronto a parità di cash medio.}
+Per verificare rigorosamente che la parte appresa del modello abbia davvero aggiunto valore è stato costruita una frontiera di riferimento. 
+La frontiera è stata costruita partendo dal volatility targeting di Moreira e Muir e tracciando una curva di punti (cash medio, MDD) al variare del target di volatilità $\sigma_{target}$.
+Sono state poi confrontate le performance dell'agente con la frontiera per capire se esso si è riuscito a posizionare in un'area del grafico più convenitente rispetto alla frontiera.
+
+
+
+\subsection{Baseline di confronto}
+Ogni strategia appresa è confrontata con riferimenti non appresi:
+\begin{itemize}
+  \item la \textbf{formula fissa} ($m_\theta=1$, $p$ costante), per isolare il
+        contributo dell'apprendimento rispetto alla sola struttura;
+  \item il \textbf{paniere equipesato} pienamente investito, per avere un riferimento senza gestione dell'esposizione in modo da comprendere quanto l'overlay riduce il drawdown rispetto a restare sempre esposti;
+  \item la posizione \textbf{100\% cash}, come null di riferimento per il
+        controllo del drawdown.
+\end{itemize}
+
+\subsection{Metriche di valutazione}
+Essendo l'obiettivo la riduzione del drawdown a parità di
+capacità di stare sul mercato, si adotta il seguente insieme di metriche.
+
+\paragraph{Metriche primarie.}
+\begin{itemize}
+  \item \textbf{Maximum Drawdown} (MDD): massima perdita dal picco,
+        $\max_t (\text{picco}_t - V_t)/\text{picco}_t$. È la metrica guida.
+  \item \textbf{Calmar}: $\text{CAGR}/\text{MDD}$. Rendimento per unità di
+        drawdown. Premia chi riduce il drawdown senza rinunciare al
+        rendimento. Serve a capire se la difesa è ottenuta semplicemente restando in liquidità o da una strategia di esposizione intelligente.
+  \item \textbf{Sharpe}: rendimento medio / volatilità (annualizzato).
+        Utile in contrasto col Calmar per
+        distinguere il controllo del rischio dalla sola conservatività.
+  \item \textbf{Cash medio}: capitale medio tenuto in liquidità. Rende esplicito il
+        costo di ogni riduzione di drawdown: un MDD più basso ottenuto
+        con più cash è conservatività, non tempismo.
+\end{itemize}
+
+\paragraph{Metriche per il confronto sui panieri.}
+Per valutare la selezione rispetto all'equipesato si usano inoltre:
+\begin{itemize}
+  \item \textbf{MDD\_gain}: riduzione di drawdown rispetto a un null a liquidità
+        costante pari al cash medio del modello ($>0$ indica difesa attiva reale);
+  \item \textbf{correlazione cash--drawdown}: verifica che la liquidità sia
+        alzata in prossimità dei ribassi e non in modo indiscriminato;
+  \item \textbf{up/down capture}: quota di rialzo catturata e di ribasso subita
+        rispetto al mercato.
+\end{itemize}
+

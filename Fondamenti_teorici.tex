@@ -1,0 +1,133 @@
+% !TEX root = main.tex
+
+
+In questa sezionie vengono fornite al lettore tutte le nozioni di base che servono per comprendere il modello e gli esperimenti.
+
+\section{Fondamenti economici}
+
+\subsection{Gestione del portafoglio}
+
+Gestire il portafoglio significa distribuire il capitale tra un insieme di asset e aggiornarne l'allocazione nel tempo. Ad ogni istante $t$ l'allocazione del portafoglio è un vettore di pesi $w_t$ non negativi che sommano a 1. 
+Gli asset veri e propri sono affiancati da un asset fittizio cash che corrisponde alla liquidità, cioè tutto quel capitale che si decide di non investire. 
+Si definisce esposizione $e_t$ la quota complessiva investita nel paniere di asset veri e propri, mentre la parte restante ($1-e_t$) resta in liquidità. 
+Il rendimento del portafoglio in un dato periodo equivale alla media dei rendimenti degli asset pesata per $w_t$. 
+
+Ogni ribilanciamento comporta inoltre costi di transazione in proporzione al volume scambiato. Questi costi includono le commissioni e lo slippage, ovvero la differenza tra il prezzo osservato nel momento in cui si decide di acquistare e il prezzo effettivo a cui avviene la transazione. 
+Modellare questi costi è essenziale per un confronto equo, poiché vanno a penalizzare le strategie con un turnover eccessivo. Il turnover è un termine con cui si indica la frequenza e il volume con cui i vari asset vengono comprati e venduti nel portafoglio in un dato periodo, solitamente misurato su base annuale.
+
+\subsection{Volatilità e drawdown}
+
+La volatilità misura l'ampiezza tipica delle oscillazioni di prezzo attorno alla loro media, quantificando il grado di incertezza e turbolenza a cui è esposto il portafoglio.
+Cioè prendendo come esempio un titolo che ha un prezzo attuale di 100\$, se esso ha una volatilità annua del 5\% vuol dire che è molto probabile che quel titolo tra un anno avrà un prezzo che oscilla in un range ±5\%.
+
+A differenza della direzione dei prezzi che è quasi impossibile da prevedere giorno per giorno, la volatilità tende a raggrupparsi nel tempo. Giornate con alta turbolenza sono sistematicamente seguite da altre fasi agitate, e i periodi di calma tendono a persistere nel tempo. Tutto questo rende la volatilità prevedibile. 
+
+Questa asimmetria tra la volatilità e la direzione rende economicamente utile agire sul rischio invece che sul rendimento~\cite{fleming2001economic}.
+
+Il drawdown $\mathrm{DD}_t$ è la perdita corrente rispetto al massimo storico del portafoglio. La formula è $(\text{picco}-V_t)/\text{picco}$ e il suo massimo (MDD) è il suo valore peggiore. Esso è la misura di perdita più importante per un investitore ed è l'obiettivo centrale di questo lavoro.
+
+\subsection{Volatility targeting}
+Il volatility targeting è una regola classica di gestione del rischio: si scala l'esposizione in modo inversamente proporzionale alla volatilità di mercato, così da tenere il rischio del portafoglio vicino a un livello obiettivo $\sigma_\text{target}$. Nella forma generale l'esposizione e'
+$e_t = (\sigma_{\text{target}}/\sigma_{\mathrm{mkt},t})^{p}$: con $p=1$ si
+ha il volatility targeting classico ($1/\sigma$), Moreira e Muir applicano invece $p=2$ ($1/\sigma^2$), che riduce l'esposizione in modo piu'
+aggressivo quando la volatilita' sale. Sempre Moreira e Muir~\cite{moreira2017volatility}
+mostrano che gestire l'esposizione sulla volatilita' realizzata migliora il
+profilo rischio/rendimento: e' la regola strutturale che fa da riferimento in
+tutto il lavoro. 
+\subsection{Dividendi}
+Un dividendo è una porzione degli utili aziendali che la socièta decide di non reinvestire internamente, ma di fornire in contanti ai propri azionisti come pagamento.
+Il meccanismo funziona in questo modo: nel giorno in cui avviene il dividendo il denaro esce dai bilanci dell'azienda e il prezzo dell'azione in borsa scende di un importo pari al dividendo pagato.
+Per esempio se un'azione è quotata in borsa a 100\$ e paga 2\$ di dividendo quando riaprirà il mercato sarà quotata a 98\$ e l'azionista si ritroverà 2\$ in liquidità.
+Quest'azione potrebbe essere un problema durante l'addestramento di un modello in quanto esso registrerà una perdita anche se in realtà non è avvenuta.
+
+
+\subsection{Frazionamento azionario (Stock Split)}
+Un frazionamento avviene quando una società decide di aumentare il numero di azioni in circolazione dividendole, mantenendo però inalterato il valore totale dell'azienda.
+È come tagliare a metà le fette di una torta già divisa. Per esempio se un'azienda annuncia uno split di 2 a 1 e tu hai un'azione che vale 100\$, alla riapertura del mercato ti ritroverai con 2 azioni da 50\$.
+Durante l'addestramento di un agente se i dati non sono aggiustati in base allo split i prezzi di chiusura passerebbero da 100\$ a 50\$ e l'agente penserebbe che sia avvenuto un crollo anche se in realtà non c'è stato.
+
+\subsection{Regimi di mercato}
+\subsubsection{Bull Market}
+
+È una fase prolungata del ciclo economico e finanziario in cui i prezzi degli asset registrano una tendenza costante al rialzo. 
+È caratterizzato da forte ottimismo degli investitori, fiducia nell'economia e da bassa volatilità. 
+In questi periodi le strategie passive come il Buy \& Hold ottengono i risultati migliori.
+
+\subsubsection{Bear Market}
+È una fase prolungata di declino dei mercati. 
+Si entra ufficialmente in un bear market quando l'indice azionario registra una perdita superiore al 20\% rispetto ai suoi massimi recenti. 
+È caratterizzato da pessimismo, avversione al rischio e da un netto cambio di regime della volatilità, che si alza e rimane elevata in modo strutturale. 
+L'obiettivo principale in questa fase è preservare il capitale.
+
+\subsubsection{Crollo}
+Il crollo è una caduta improvvisa, violenta e verticalizzata dei prezzi che si sviluppa in un arco di tempo che varia da alcuni giorni a poche settimane. 
+È spesso causato da shock sistemici imprevisti o da ondate di vendite dettate dal panico. 
+Genera picchi estremi di turbolenza e volatilità un esempio è il crollo avvenuto durangte il Covid.
+
+\section{Fondamenti Deep Reinforcement Learning}
+\subsection{Reinforcement learning}
+Il Reinforcement learning è un ramo del Machine Learning in cui un sistema software impara a prendere decisioni provando e sbagliando, senza avere qualcuno che gli mostri in anticipo la risposta corretta. Ad ogni passo un agente osserva uno stato $s_t$, sceglie un'azione $a_t$ secondo una determinata politica e riceve una ricompensa $r_t$ transitando poi allo stato successivo.
+L'obiettivo è massimizzare il ritorno atteso, cioè la somma scontata delle ricompense future, fattore di sconto $\gamma\in[0,1)$.
+La funzione di reward $V(s)$ stima il ritorno atteso a partire da uno stato. 
+Il problema da noi affrontato si addice a questa formulazione infatti le decisioni di allocazione sono sequenziali, interagiscono con i costi di transazione e hanno effetti nel tempo.
+
+\subsection{Metodi Actor-Critic e PPO}
+Gli algoritmi di tipo Policy Gradient ottimizzano direttamente la strategia decisionale dell'agente, senza dover prima stimare il valore numerico di ogni singola azione.
+Essi però soffrono di una elevata instabilità durante l'addestramento, cioè un alta varianza del gradiente. 
+Questa caratteristica non gli permette di funzionare a dovere su dati azionari in quanto la maggior parte di essi è costituito da rumore.
+Per risolvere questo problema si è scelto di adottare un'architettura Actor-Critic, la quale si basa sul dividere il compito dell'apprendimento tra due reti neurali distinte che lavorano insieme:
+
+\begin{itemize}
+    \item \textbf{L'Actor:} È la politica vera e propria, osserva il mercato e decide quale azione prendere.
+    \item \textbf{Il Critic:} È un valutatore che stima il valore atteso dello stato corrente $V(s_t)$. Cioè prevede quanto il portafoglio guadagnerà in futuro partendo da quella specifica situazione di mercato.
+\end{itemize}
+
+L'aggiornamento dell'Actor si basa sul conteggio di "vantaggio" in formula $A_t = R_t - V(s_t)$, che viene calcolato tramite GAE (Generalized Advantage Estimation).
+In sotanza l'Actor viene premiato solo se la sua azione ha prodotto un risultato migliore a quello previsto dal Critic, e viene penalizzato se ha fatto peggio.
+Durante l'addestramento anche il Critic impara a migliorare le sue previsioni.
+
+Per fare in modo che questo processo di addestramento non diverga viene utilizzato l'algoritmo PPO (Proximal Policy Optimization). 
+PPO impedisce che un singolo colpo di fortuna durante l'addestramento, che genera un vantaggio molto grande, vada a cambiare drasticamente i pesi della rete distruggendo la strategia appresa fino a quel punto.
+Questo viene fatto applicando un meccanismo di taglio alla funzione obbiettivo, imponendo che la politica possa aggiornarsi solo a piccoli passi garantendo una convergenza stabile.
+
+\subsection{Distribuzione beta}
+Durante l'addestramento, l'agente deve bilanciare lo sfruttamento delle strategie vincenti note con l'esplorazione di nuove possibilità. Per farlo, l'Actor non restituisce un'azione deterministica fissa, ma campiona la sua decisione da una distribuzione di probabilità. 
+
+In questo lavoro è stata usata la distribuzione Beta.
+La distribuzione Beta è una distribuzione di probabilità continua definita nell'intervallo chiuso $[0,1]$.
+Questa caratteristica la rende adatta a questo lavoro, poiché non potrà mai suggerire azioni non ammesse per l'obiettivo, come investire il 120\% del capitale.
+La forma della curva non è fissa ma viene modificata da due parametri positivi $\alpha$ e $\beta$.
+In questo lavoro la Beta campiona il moltiplicatore di esposizione $m_\theta$, che attraverso la formula fissa di volatility targeting decide l'esposizione al mercato $e_t$; regolare $\alpha$ e $\beta$ significa impostare quanto la rete decide di esporsi.
+Quando la rete sbilancia la curva verso $1$ ($\alpha > \beta$) sta imparando che in quel regime di mercato conviene un $m_\theta$ alto, ovvero un'esposizione elevata. Quando la sposta verso $0$, impara a ridurre l'esposizione mantenendo più liquidità.
+Se la rete apprende valori molto alti per entrambi i parametri, la curva si concentra in un picco stretto, vuol dire che l'agente ha smesso di esplorare ed è sicuro dell'esposizione da scegliere.
+Se invece la curva è piatta $\alpha = \beta = 1$, l'agente non sa cosa fare e prova a caso qualsiasi valore tra 0 e 1.
+
+
+
+\subsection{Reti ricorrenti e invarianza di dominio}
+Le serie storiche finanziarie sono elaborate tramite una rete ricorrente GRU (Gated Recurrent Unit).
+La (GRU)~\cite{cho2014gru} è un'architettura ricorrente progettata per modellare dipendenze temporali complesse su sequenze arbitrarie, mitigando il problema della scomparsa del gradiente. A differenza delle reti ricorrenti standard o delle LSTM, la GRU sintetizza l'intera memoria storica in un unico stato latente $h_t$, regolandone il flusso mediante due meccanismi a porta con attivazione sigmoidea:
+\begin{enumerate}
+    \item \textbf{Reset Gate ($r_t$):} definita come $r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r)$, determina in quale misura la memoria passata $h_{t-1}$ debba essere ignorata nel calcolo della nuova rappresentazione candidata $\tilde{h}_t = \tanh(W_h x_t + U_h (r_t \odot h_{t-1}) + b_h)$;
+    \item \textbf{Update Gate ($z_t$):} definita come $z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z)$, controlla quanta informazione del precedente stato $h_{t-1}$ debba essere preservata rispetto alla nuova proposta $\tilde{h}_t$.
+\end{enumerate}
+Lo stato nascosto finale è aggiornato tramite interpolazione lineare:
+\begin{equation}
+h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t.
+\end{equation}
+Questa formulazione permette all'unità di conservare intatte caratteristiche rilevanti lungo finestre temporali estese oppure di resettare rapidamente il contesto in presenza di discontinuità o cambi di regime nella serie.
+
+\subsection{Aprendimento supervisionato}
+L'apprendimento supervisionato è un modello del machine learning in cui una rete neurale o statistica viene addestrata un set di dati etichettati.
+L'algortmo riceve in input sia i dati di partenza che le risposte corrette corrispondenti, ovvero le etichette.
+L'obiettivo dell'addestramento è costruire una funzione matematica in grado di mappare correttamente gli input negli output. 
+E lo si fa cercando di minimizzare mano a mano l'errore tra le previsioni dela rete e le etichette.
+Una volta terminato il training il modello ha imparato a generalizzare riuscendo a dare la risposta corretta anche su dati nuovi e mai osservati.
+
+\subsection{Binary Cross-Entropy Loss (BCE)}
+La BCE è una specifica loss function utilizzata per ottimizzare i modelli neurali nei problemi di classificazione binaria, cioè quando la variabile target ha solo due valori possibili.
+Questa funzione calcola la distanza tra la probabilità predetta dal modello e l'etichetta nel dataset.
+La sua caratteristica distintiva è l'utilizzo del logaritmo che applica una penalità esponenziale agli errori commess con elevata confidenza.
+Se la rete neurale è estremamente sicura di una classificazione errata, il termine logaritmico esplode verso l'infinito, producendo un errore altissimo che forza l'ottimizzatore a correggere drasticamente i pesi durante la backpropagation.
+
+

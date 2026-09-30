@@ -1,0 +1,98 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Riassunto}{i}{chapter*.1}%
+\contentsline {chapter}{Acknowledgment}{iii}{chapter*.2}%
+\contentsline {chapter}{List of Figures}{vii}{chapter*.2}%
+\contentsline {chapter}{List of Tables}{ix}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Introduzione}{1.0}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Stato dell'arte}{1.1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Definizione del problema}{1.1}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Obiettivi e limiti}{1.4}{subsection.1.2.1}%
+\contentsline {subsubsection}{Obiettivo primario}{1.4}{subsection.1.2.1}%
+\contentsline {subsubsection}{Limiti}{1.4}{subsection.1.2.1}%
+\contentsline {subsubsection}{Obiettivo secondario}{1.4}{subsection.1.2.1}%
+\contentsline {chapter}{\numberline {2}Fondamenti Teorici}{2.0}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Fondamenti economici}{2.0}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Gestione del portafoglio}{2.0}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Volatilità e drawdown}{2.0}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Volatility targeting}{2.1}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Dividendi}{2.1}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Frazionamento azionario (Stock Split)}{2.1}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Regimi di mercato}{2.2}{subsection.2.1.6}%
+\contentsline {subsubsection}{Bull Market}{2.2}{subsection.2.1.6}%
+\contentsline {subsubsection}{Bear Market}{2.2}{subsection.2.1.6}%
+\contentsline {subsubsection}{Crollo}{2.2}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}Fondamenti Deep Reinforcement Learning}{2.2}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Reinforcement learning}{2.2}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Metodi Actor-Critic e PPO}{2.3}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Distribuzione beta}{2.3}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Reti ricorrenti e invarianza di dominio}{2.4}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Aprendimento supervisionato}{2.4}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Binary Cross-Entropy Loss (BCE)}{2.5}{subsection.2.2.6}%
+\contentsline {chapter}{\numberline {3}Progettazione dataset e metodologia sperimentale}{3.0}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Progettazione del dataset}{3.0}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Fonte e universo}{3.0}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Feature e loro selezione}{3.1}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Suddivisione dei dati}{3.1}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Metodologia sperimentale}{3.1}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Strategia appresa e formula di riferimento}{3.1}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Funzione di reward}{3.2}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Protocollo di valutazione}{3.2}{subsection.3.2.3}%
+\contentsline {paragraph}{Confronto a parità di cash medio.}{3.3}{table.caption.5}%
+\contentsline {subsection}{\numberline {3.2.4}Baseline di confronto}{3.3}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Metriche di valutazione}{3.3}{subsection.3.2.5}%
+\contentsline {paragraph}{Metriche primarie.}{3.3}{subsection.3.2.5}%
+\contentsline {paragraph}{Metriche per il confronto sui panieri.}{3.4}{subsection.3.2.5}%
+\contentsline {chapter}{\numberline {4}Implementazione modello}{4.0}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Modello}{4.0}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Introduzione}{4.0}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Feature}{4.0}{subsection.4.1.2}%
+\contentsline {subsubsection}{Feature per asset}{4.0}{subsection.4.1.2}%
+\contentsline {subsubsection}{Normalizzazione}{4.1}{subsection.4.1.2}%
+\contentsline {subsubsection}{prev\_weights (B, N)}{4.1}{subsection.4.1.2}%
+\contentsline {subsubsection}{risk\_state (B, 6)}{4.1}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Architettura}{4.2}{subsection.4.1.3}%
+\contentsline {subsubsection}{Rete}{4.3}{subsection.4.1.3}%
+\contentsline {paragraph}{GRU}{4.4}{figure.caption.6}%
+\contentsline {paragraph}{Actor}{4.4}{lstnumber.-1.1}%
+\contentsline {paragraph}{Overlay di volatility targeting}{4.5}{lstnumber.4.1.4}%
+\contentsline {paragraph}{Critic}{4.5}{lstnumber.4.1.4}%
+\contentsline {paragraph}{Output del modello}{4.5}{lstnumber.4.2.3}%
+\contentsline {subsection}{\numberline {4.1.4}Environment}{4.5}{subsection.4.1.4}%
+\contentsline {paragraph}{Costi di transazione (\lstinline {TransactionOptimizer})}{4.6}{subsection.4.1.4}%
+\contentsline {paragraph}{Episodio e ricompensa}{4.7}{equation.4.1}%
+\contentsline {paragraph}{Provenienza}{4.7}{equation.4.1}%
+\contentsline {subsection}{\numberline {4.1.5}Addestramento}{4.7}{subsection.4.1.5}%
+\contentsline {paragraph}{Algoritmo di addestramento (PPO)}{4.7}{subsection.4.1.5}%
+\contentsline {paragraph}{Esplorazione}{4.8}{Item.18}%
+\contentsline {paragraph}{Dati e suddivisione temporale}{4.8}{Item.18}%
+\contentsline {paragraph}{Iperparametri}{4.8}{Item.18}%
+\contentsline {chapter}{\numberline {5}Esperimenti e Risultati}{5.0}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Conclusioni: cosa aggiunge l'apprendimento}{5.0}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Esperimento 1: Come influisce il parametro $\sigma _{\mathrm {target}}$}{5.0}{subsection.5.1.1}%
+\contentsline {paragraph}{Conservatività, non intelligenza.}{5.1}{table.caption.7}%
+\contentsline {subsection}{\numberline {5.1.2}Esperimento 2: L'esponente al centro delle osservazioni}{5.3}{subsection.5.1.2}%
+\contentsline {subsubsection}{Esponente appreso}{5.4}{subsection.5.1.2}%
+\contentsline {paragraph}{Una loss dedicata all'esponente}{5.5}{table.caption.11}%
+\contentsline {subsubsection}{Regolare l'esponente con una regola}{5.7}{table.caption.13}%
+\contentsline {subsection}{\numberline {5.1.3}Generalità: trasferimento su panieri diversi}{5.8}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Filo conduttore}{5.10}{subsection.5.1.4}%
+\contentsline {chapter}{\numberline {6}Applicazione Mobile}{6.0}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Dettagli implementativi}{6.0}{section.6.1}%
+\contentsline {subsubsection}{Sorgente e struttura del dato}{6.0}{section.6.1}%
+\contentsline {subsubsection}{Pipeline di aggiornamento automatico}{6.1}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Datasets}{6.1}{subsection.6.1.1}%
+\contentsline {subsubsection}{Database locale}{6.1}{subsection.6.1.1}%
+\contentsline {subsubsection}{Sincronizzazione lato applicazione}{6.2}{figure.caption.18}%
+\contentsline {subsubsection}{Inizializzazione e primo avvio}{6.3}{figure.caption.18}%
+\contentsline {subsubsection}{Limiti}{6.3}{figure.caption.18}%
+\contentsline {subsection}{\numberline {6.1.2}Esecuzione del modello on-device}{6.3}{subsection.6.1.2}%
+\contentsline {chapter}{\numberline {7}Formule}{7.0}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Strategie}{7.0}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Inverse Volatility}{7.0}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Kelly Criterion}{7.1}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Target Volatility}{7.3}{subsection.7.1.3}%
+\contentsline {chapter}{\numberline {8}Conclusioni}{8.0}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Discussione: un risultato atteso nella letteratura}{8.0}{section.8.1}%
+\contentsline {paragraph}{Limiti.}{8.1}{section.8.1}%
+\contentsline {paragraph}{Contributo di questo lavoro.}{8.1}{section.8.1}%
+\contentsline {chapter}{Bibliography}{B1}{section.8.1}%
