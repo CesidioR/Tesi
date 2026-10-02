@@ -25,6 +25,8 @@
 
 \usepackage{setspace}
 \onehalfspacing % or \doublespacing if required
+\raggedbottom  % evita lo stiramento verticale (spazi eccessivi) con i float [H]
+\setlength{\emergencystretch}{3em}  % evita le righe che sbordano nel margine (overfull hbox)
 
 \usepackage{indentfirst}
 \usepackage{pdflscape}
@@ -242,7 +244,7 @@
   \renewcommand{\footrulewidth}{0.4pt}
 }
 
-\usepackage[round]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
 
 
 % ===============================
@@ -280,6 +282,21 @@
 \newcommand{\CourseUniversity}{Laurea Triennale in Informatica, DISI, Universit\`a di Bologna}
 
 \setlength{\headheight}{14pt}
+
+% ===============================
+% Pagine bianche twoside corrette anche con numerazione per-capitolo
+% (\cleardoublepage deve guardare il foglio FISICO, non il contatore
+%  "page" che viene azzerato a ogni capitolo)
+% ===============================
+\usepackage{atbegshi}
+\newcounter{abspage}
+\AtBeginShipout{\stepcounter{abspage}}
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \ifodd\value{abspage}%
+    \hbox{}\thispagestyle{empty}\clearpage%
+  \fi
+}
 
 % ===============================
 % End of Preamble
@@ -342,15 +359,6 @@
 	\clearpage{\pagestyle{empty}\cleardoublepage}
 	
 	
-
-    \pagestyle{chapterstar}
-    \chapter*{Acknowledgment}
-    \addcontentsline{toc}{chapter}{Acknowledgment}
-    \thispagestyle{chapterstar}
-	\label{acknow}
-	\input{Acknowledgment}
-	\clearpage{\pagestyle{empty}\cleardoublepage}
-	
 		
 	
 	%table of contents
@@ -360,19 +368,7 @@
     \pagestyle{fancy}
     \cleardoublepage
 
-    \addcontentsline{toc}{chapter}{List of Figures}
-	\listoffigures
-    \thispagestyle{chapterstar}
-	\clearpage{\pagestyle{empty}\cleardoublepage}
-
-    \listoftables
-    \thispagestyle{chapterstar}
-    \addcontentsline{toc}{chapter}{List of Tables}
-    \clearpage{\pagestyle{empty}\cleardoublepage}
-
-    
-
-    \mainmatter 
+    \mainmatter
     \pagestyle{chapternum}
     
     \pagenumbering{arabic}
@@ -419,17 +415,14 @@
     \thispagestyle{chapterplain}
     \label{chap:applicazione}
 	\input{Applicazione.tex}
+    \clearpage{\pagestyle{empty}\cleardoublepage}
 
-     \chapter{Formule}
-    \thispagestyle{chapterplain}
-	\label{chap:Formule}
-	\input{Formule.tex}
-	\clearpage{\pagestyle{empty}\cleardoublepage}
 
 	\chapter{Conclusioni}
     \thispagestyle{chapterplain}
     \label{chap:conclusioni}
 	\input{Conclusioni.tex}
+    \clearpage{\pagestyle{empty}\cleardoublepage}
 
     
     \pagestyle{plain}
@@ -439,6 +432,14 @@
     \bibliographystyle{plainnat}
     \addcontentsline{toc}{chapter}{Bibliography}
     \bibliography{references}
+
+    \pagestyle{chapterstar}
+    \chapter*{Acknowledgment}
+    \addcontentsline{toc}{chapter}{Acknowledgment}
+    \thispagestyle{chapterstar}
+	\label{acknow}
+	\input{Acknowledgment}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
 
 \end{document}
 

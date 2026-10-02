@@ -3,46 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Warning--can't use both volume and number fields in wang2021deeptrader
-You've used 16 entries,
+You've used 17 entries,
             2773 wiz_defined-function locations,
-            686 strings with 7940 characters,
-and the built_in function-call counts, 8219 in all, are:
-= -- 713
-> -- 532
-< -- 7
-+ -- 178
-- -- 162
-* -- 706
-:= -- 1254
-add.period$ -- 50
-call.type$ -- 16
-change.case$ -- 102
-chr.to.int$ -- 16
-cite$ -- 33
-duplicate$ -- 356
-empty$ -- 646
-format.name$ -- 184
-if$ -- 1712
+            693 strings with 8100 characters,
+and the built_in function-call counts, 8614 in all, are:
+= -- 752
+> -- 542
+< -- 8
++ -- 182
+- -- 165
+* -- 733
+:= -- 1314
+add.period$ -- 53
+call.type$ -- 17
+change.case$ -- 106
+chr.to.int$ -- 17
+cite$ -- 34
+duplicate$ -- 376
+empty$ -- 687
+format.name$ -- 188
+if$ -- 1796
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 15
-newline$ -- 90
-num.names$ -- 64
-pop$ -- 203
+missing$ -- 16
+newline$ -- 95
+num.names$ -- 68
+pop$ -- 211
 preamble$ -- 1
-purify$ -- 86
+purify$ -- 89
 quote$ -- 0
-skip$ -- 281
+skip$ -- 294
 stack$ -- 0
-substring$ -- 305
+substring$ -- 335
 swap$ -- 43
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 176
-warning$ -- 1
-while$ -- 68
+type$ -- 187
+warning$ -- 0
+while$ -- 73
 width$ -- 0
-write$ -- 214
-(There was 1 warning)
+write$ -- 227

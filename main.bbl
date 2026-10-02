@@ -1,18 +1,23 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Bailey et~al.(2014)Bailey, Borwein, L{\'o}pez~de Prado, and Zhu]{bailey2014pseudo}
-David~H. Bailey, Jonathan~M. Borwein, Marcos L{\'o}pez~de Prado, and Qiji~Jim Zhu.
-\newblock Pseudo-mathematics and financial charlatanism: The effects of backtest overfitting on out-of-sample performance.
-\newblock \emph{Notices of the American Mathematical Society}, 61\penalty0 (5):\penalty0 458--471, 2014.
+\bibitem[Bailey et~al.(2014)Bailey, Borwein, L{\'o}pez~de Prado, and
+  Zhu]{bailey2014pseudo}
+David~H. Bailey, Jonathan~M. Borwein, Marcos L{\'o}pez~de Prado, and Qiji~Jim
+  Zhu.
+\newblock Pseudo-mathematics and financial charlatanism: The effects of
+  backtest overfitting on out-of-sample performance.
+\newblock \emph{Notices of the American Mathematical Society}, 61\penalty0
+  (5):\penalty0 458--471, 2014.
 
 \bibitem[Betancourt and Chen(2021)]{betancourt2021deep}
 Carlos Betancourt and Wen-Hui Chen.
-\newblock Deep reinforcement learning for portfolio management of markets with a dynamic number of assets.
+\newblock Deep reinforcement learning for portfolio management of markets with
+  a dynamic number of assets.
 \newblock \emph{Expert Systems with Applications}, 164:\penalty0 114002, 2021.
 \newblock \doi{10.1016/j.eswa.2020.114002}.
 
@@ -24,67 +29,95 @@ Gregory Blotnick.
 
 \bibitem[Chen et~al.(2026)Chen, Li, and Wang]{chen2026mars}
 Jiayi Chen, Jing Li, and Guiling Wang.
-\newblock Mars: A meta-adaptive reinforcement learning framework for risk-aware multi-agent portfolio management.
-\newblock In \emph{Proceedings of the AAAI Conference on Artificial Intelligence}, 2026.
+\newblock Mars: A meta-adaptive reinforcement learning framework for risk-aware
+  multi-agent portfolio management.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, 2026.
 
-\bibitem[Cho et~al.(2014)Cho, van Merri{\"e}nboer, Gulcehre, Bahdanau, Bougares, Schwenk, and Bengio]{cho2014gru}
-Kyunghyun Cho, Bart van Merri{\"e}nboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio.
-\newblock Learning phrase representations using rnn encoder--decoder for statistical machine translation.
-\newblock In \emph{Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)}, pages 1724--1734, 2014.
+\bibitem[Cho et~al.(2014)Cho, van Merri{\"e}nboer, Gulcehre, Bahdanau,
+  Bougares, Schwenk, and Bengio]{cho2014gru}
+Kyunghyun Cho, Bart van Merri{\"e}nboer, Caglar Gulcehre, Dzmitry Bahdanau,
+  Fethi Bougares, Holger Schwenk, and Yoshua Bengio.
+\newblock Learning phrase representations using rnn encoder--decoder for
+  statistical machine translation.
+\newblock In \emph{Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 1724--1734, 2014.
+
+\bibitem[Engle(1982)]{engle1982arch}
+Robert~F. Engle.
+\newblock Autoregressive conditional heteroscedasticity with estimates of the
+  variance of united kingdom inflation.
+\newblock \emph{Econometrica}, 50\penalty0 (4):\penalty0 987--1007, 1982.
 
 \bibitem[Fleming et~al.(2001)Fleming, Kirby, and Ostdiek]{fleming2001economic}
 Jeff Fleming, Chris Kirby, and Barbara Ostdiek.
 \newblock The economic value of volatility timing.
-\newblock \emph{The Journal of Finance}, 56\penalty0 (1):\penalty0 329--352, 2001.
+\newblock \emph{The Journal of Finance}, 56\penalty0 (1):\penalty0 329--352,
+  2001.
 
 \bibitem[Goyal et~al.(2024)Goyal, Welch, and Zafirov]{goyal2024comprehensive}
 Amit Goyal, Ivo Welch, and Athanasse Zafirov.
-\newblock A comprehensive 2022 look at the empirical performance of equity premium prediction.
-\newblock \emph{The Review of Financial Studies}, 37\penalty0 (11):\penalty0 3490--3557, 2024.
+\newblock A comprehensive 2022 look at the empirical performance of equity
+  premium prediction.
+\newblock \emph{The Review of Financial Studies}, 37\penalty0 (11):\penalty0
+  3490--3557, 2024.
 
 \bibitem[Gu et~al.(2020)Gu, Kelly, and Xiu]{gu2020empirical}
 Shihao Gu, Bryan Kelly, and Dacheng Xiu.
 \newblock Empirical asset pricing via machine learning.
-\newblock \emph{The Review of Financial Studies}, 33\penalty0 (5):\penalty0 2223--2273, 2020.
+\newblock \emph{The Review of Financial Studies}, 33\penalty0 (5):\penalty0
+  2223--2273, 2020.
 
 \bibitem[Jiang et~al.(2017)Jiang, Xu, and Liang]{jiang2017deep}
 Zhengyao Jiang, Dixing Xu, and Jinjun Liang.
-\newblock A deep reinforcement learning framework for the financial portfolio management problem.
+\newblock A deep reinforcement learning framework for the financial portfolio
+  management problem.
 \newblock \emph{arXiv preprint arXiv:1706.10059}, 2017.
 
 \bibitem[Jung and Oh(2025)]{jung2025factor}
 Nak~Hyun Jung and Taeyeon Oh.
-\newblock Factor-based deep reinforcement learning for asset allocation: Comparative analysis of static and dynamic beta reward designs.
+\newblock Factor-based deep reinforcement learning for asset allocation:
+  Comparative analysis of static and dynamic beta reward designs.
 \newblock \emph{PLoS ONE}, 20\penalty0 (12):\penalty0 e0332779, 2025.
 
 \bibitem[Lwele et~al.(2025)Lwele, Emmanuel, and Sitali]{lwele2025riskaware}
 Emmanuel Lwele, Sabuni Emmanuel, and Sitali~Gabriel Sitali.
-\newblock Risk-aware deep reinforcement learning for dynamic portfolio optimization.
+\newblock Risk-aware deep reinforcement learning for dynamic portfolio
+  optimization.
 \newblock \emph{arXiv preprint arXiv:2511.11481}, 2025.
 
 \bibitem[Moreira and Muir(2017)]{moreira2017volatility}
 Alan Moreira and Tyler Muir.
 \newblock Volatility-managed portfolios.
-\newblock \emph{The Journal of Finance}, 72\penalty0 (4):\penalty0 1611--1644, 2017.
+\newblock \emph{The Journal of Finance}, 72\penalty0 (4):\penalty0 1611--1644,
+  2017.
 
-\bibitem[Schulman et~al.(2016)Schulman, Moritz, Levine, Jordan, and Abbeel]{schulman2016gae}
-John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel.
-\newblock High-dimensional continuous control using generalized advantage estimation.
-\newblock In \emph{International Conference on Learning Representations (ICLR)}, 2016.
+\bibitem[Schulman et~al.(2016)Schulman, Moritz, Levine, Jordan, and
+  Abbeel]{schulman2016gae}
+John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter
+  Abbeel.
+\newblock High-dimensional continuous control using generalized advantage
+  estimation.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2016.
 
-\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and Klimov]{schulman2017proximal}
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017proximal}
 John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock Proximal policy optimization algorithms.
 \newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
 
 \bibitem[Wang et~al.(2021)Wang, Huang, Tu, Zhang, and Xu]{wang2021deeptrader}
 Zhicheng Wang, Biwei Huang, Shikui Tu, Kun Zhang, and Lei Xu.
-\newblock Deeptrader: A deep reinforcement learning approach for risk-return balanced portfolio management with market conditions embedding.
-\newblock In \emph{Proceedings of the AAAI Conference on Artificial Intelligence}, volume~35, pages 643--650, 2021.
+\newblock Deeptrader: A deep reinforcement learning approach for risk-return
+  balanced portfolio management with market conditions embedding.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~35, pages 643--650, 2021.
 
 \bibitem[Zhang et~al.(2020)Zhang, Zohren, and Roberts]{zhang2020deeplearning}
 Zihao Zhang, Stefan Zohren, and Stephen Roberts.
 \newblock Deep learning for portfolio optimization.
-\newblock \emph{The Journal of Financial Data Science}, 2\penalty0 (4):\penalty0 8--20, 2020.
+\newblock \emph{The Journal of Financial Data Science}, 2\penalty0
+  (4):\penalty0 8--20, 2020.
 
 \end{thebibliography}

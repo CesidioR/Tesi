@@ -1,77 +1,111 @@
 % !TEX root = main.tex
+Oltre al modello è stata implementata anche un'applicazzione mobile per android.
 
+\section{Obiettivo dell'applicazione}
+l'obiettivo principale dell'applicazzione è rendere fruibile iò che la parte di ricerca analizza soltanto in backtest.
+Il modello DRL, le strategia del volatility targeting e dell'equipesato vengono portate fuori dall'ambiente sperimentale assieme all'inverse volatility e al principio di Kelly.
+Queste ultime due sono state aggiunte per dare all'utente la possibilità di osservare come si comportano strategie cn obiettivi diversi, il kelly in particolare non si concentra sul minimizzare la perdita ma massimizzare il guadagno.
+L'utente può applicare queste strategie a un proprio paniere di titoli e ciò gli permette di fare lui gli esperimenti che vuole.
+In questo modo i metodi analizzati diventano uno strumento realmente utilizzabile.
+
+
+A questo obiettivo principale se ne affiancano due secondari.
+
+Confronto ed esplorazione delle strategie.
+L'applicazione permette all'utente di osservare, sullo stesso paniere, i pesi che ciascuna strategia assegnerebbe e di valutarle tramite un backtest comparativo con le metriche principali (Sharpe, maximum drawdown, Calmar). 
+Diventa così uno strumento per toccare con mano il risultato centrale di questo lavoro: il modello appreso e la formula fissa producono allocazioni molto simili, rendendo evidente anche all'utente la differenza tra una difesa ottenuta da una reale capacità predittiva e una dovuta alla semplice conservatività.
+
+Position sizing accessibile.
+Riprendendo la motivazione dell'introduzione, ovvero i bias comportamentali che compromettono il dimensionamento della posizione fatto a intuito, l'applicazione offre uno strumento di position sizing sistematico e consapevole del rischio, utilizzabile anche da chi non possiede una conoscenza approfondita della teoria finanziaria.
 \section{Interfaccia e funzionalità}
 \label{sec:ui}
 
-In questa sezione l'interfaccia dell'applicazione, organizzata attorno a due schermate principali.
+In questa sezione si descrive l'interfaccia dell'applicazione, organizzata attorno a due schermate principali.
 La UI è pensata per essere semplice e intuitiva: un utente deve poter capire facilmente come muoversi all'interno dell'app e sfruttare le varie funzionalità.
 Non è richiesta all'utente una conoscenza approfondita della teoria finanziaria per poter usufruire dell'app, anche se ovviamente è sappia almeno come funzionano le varie strategie a grandi linee.
 
+\subsection{Dashboard e gestione del portafoglio}
+In alto un selettore permette di passare tra i vari portafogli. 
+La carta centrale mostra il valore corrente del portafoglio e
+il guadagno o la perdita rispetto al capitale iniziale. 
+In alto a destra si trova un'icona che permette di creare nuovi portafogli.
+Cliccando su di essa si aprirà un form che chiederà all'utente di inserire obbligatoriamente nome e capitale iniziale del portafoglio, 
+e opzionalmente costo delle commissioni in bps (unità di misura che equivale alla centesima parte di un punto percentuale) e costo base di acquisto, se non si inseriscono questi ultimi due valori saranno impostati di default a zero.
+Appena sotto la carta sono presenti i pulsanti per eliminare il portafoglio o riavviarlo al capitale di partenza e azzerando le allocazzioni.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.40\textwidth]{Screenshot_1790856045.png}\hfill
+  \includegraphics[width=0.40\textwidth]{Screenshot_1790883668.png}
+
+  \vspace{0.6em}
+  \includegraphics[height=5cm]{Screenshot_1790856057.png}\hfill
+  \includegraphics[height=5cm]{Screenshot_1790857366.png}\hfill
+  \includegraphics[height=5cm]{Screenshot_1790856050.png}
+  \caption{Dashboard: le carte dei tre portafogli simulati (oggi, un mese fa, vuoto) e la finestra di creazione di un nuovo portafoglio.}
+  \label{fig:ui-dashboard}
+\end{figure}
+
+Sotto la carta sono elencati i titoli del portafoglio con la possibilità di rimuoerli.
+Se si sceglie di rimuovere un titolo la sua quota torna in liquidità; i pesi degli altri titoli restano invariati se si vuole aggiornarli bisogna riapplicare una strategia tra quelle proposte. 
+Il guadagno/perdita accumulato da quel titolo viene scartato, quindi il valore del portafoglio si adegua di conseguenza..
+Invece i dati nella sezione sul backtest e i pesi dati dalle varie strategie si riaggiorneranno subito appena il titolo viene eliminato dal portafoglio.
+Sotto questa sezione con i titoli del portafoglio ci sono le sezioni per scegliere quale strategia di allocazzione applicare al portafoglio.
+L'utente può applicare al portafoglio una tra cinque strategie di
+allocazione: Equipesato, Inverse Volatility, Volatility Targeting, Kelly e il
+modello DRL, queste vengono descritte in dettaglio nella sezione~\ref{set:strategie}. 
+Per il modello DRL e il Volatility Targeting può inoltre scegliere il target di volatilità tramite appositi
+selettori. Le opzioni per questi ultimi due sono i target più comuni usati in finanza.
+Applicando una strategia, i pesi vengono calcolati e assegnati ai titoli, con l'addebito dei relativi costi di transazione.
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=5cm]{Screenshot_1790856279.png}
+  \includegraphics[height=5cm]{Screenshot_1790856213.png}
+  \caption{Selezione del metodo di allocazione e visualizzazione dei pesi
+  risultanti per ciascun metodo.}
+  \label{fig:ui-weights}
+\end{figure}
+
+Infine, un grafico di confronto mostra l'andamento simulato backtest del
+capitale secondo le diverse strategie, affiancato da una tabella con le metriche
+principali. 
+È possibile inoltre scegliere che periodo deve coprire il backtest in anni e mesi (massimo 3 anni) e ogni quanti giorni deve avvenire il ribilanciamento in esso.
+In questo modo l'utente può vedere come sarebbero andate queste varie strategie nel tempo e grazie all'opzione del ribilanciamento può anche sperimentare in minima parte delle strategie sue.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=7cm]{Screenshot_1790856217.png}
+  \includegraphics[height=7cm]{Screenshot_1790857439.png}
+  \caption{Confronto delle strategie tramite backtest, con tabella delle metriche.}
+  \label{fig:ui-backtest}
+\end{figure}
 
 \subsection{Elenco dei titoli}
 La seconda schermata mostra l'elenco dei titoli dell'indice S\&P~500. Ogni voce
 riporta il logo dell'azienda, il prezzo più recente, un mini-grafico
 (sparkline) dell'andamento e la variazione percentuale, colorata in verde o
-rosso. Una barra di ricerca in alto permette di filtrare i titoli per simbolo.
-\begin{figure}[htbp]
+rosso. Una barra di ricerca in alto permette di filtrare i titoli per ticker.
+\begin{figure}[H]
   \centering
-  %\includegraphics[width=0.32\textwidth]{ui_assets.png}
+  \includegraphics[width=0.3\textwidth]{Screenshot_1790856246.png}
+  \includegraphics[width=0.3\textwidth]{Screenshot_1790884174.png}
   \caption{Elenco dei titoli con barra di ricerca e card riepilogative.}
   \label{fig:ui-assets}
 \end{figure}
 
 \subsection{Dettaglio del titolo}
 Toccando un titolo si apre la schermata di dettaglio, con il prezzo, la variazione
-e un grafico interattivo che può essere visualizzato come \emph{candele} o come
-\emph{linea}, su orizzonti temporali selezionabili (una settimana, un mese, un
+e un grafico che può essere visualizzato come candele o come
+linea, su orizzonti temporali selezionabili (una settimana, un mese, un
 anno, oppure l'intero storico). Da qui l'utente può aggiungere il titolo a uno dei
 propri portafogli tramite un apposito selettore.
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  %\includegraphics[width=0.32\textwidth]{ui_detail_candle.png}\hfill
-  %\includegraphics[width=0.32\textwidth]{ui_detail_line.png}
-  \caption{Dettaglio del titolo: grafico a candele e a linea, con selettore di
-  periodo e pulsante di aggiunta al portafoglio.}
+  \includegraphics[width=0.3\textwidth]{Screenshot_1790856261.png}\hfill
+  \includegraphics[width=0.3\textwidth]{Screenshot_1790856265.png}\hfill
+  \includegraphics[width=0.3\textwidth]{Screenshot_1790856258.png}
+  \caption{Dettaglio del titolo: grafico a candele (sinistra) e a linea (destra),
+  e, al centro, la selezione del portafoglio a cui aggiungere il titolo.}
   \label{fig:ui-detail}
-\end{figure}
-
-\subsection{Dashboard e gestione del portafoglio}
-La dashboard è il cuore dell'app. In alto un selettore permette di passare tra i
-portafogli; la carta centrale mostra il \textbf{valore corrente} del portafoglio e
-il guadagno o la perdita rispetto al capitale iniziale. Da qui si crea un nuovo
-portafoglio (indicando nome, capitale e commissioni) e si può riavviarlo o
-eliminarlo.
-\begin{figure}[htbp]
-  \centering
-  %\includegraphics[width=0.32\textwidth]{ui_dashboard.png}\hfill
-  %\includegraphics[width=0.32\textwidth]{ui_create.png}
-  \caption{Dashboard con la carta del portafoglio e finestra di creazione.}
-  \label{fig:ui-dashboard}
-\end{figure}
-
-Sotto la carta sono elencati i titoli del portafoglio, ciascuno rimovibile, e i
-cinque \textbf{metodi di allocazione} selezionabili: Equipesato, Inverse
-Volatility, Target Volatility, Kelly e il modello DRL. Applicando un metodo,
-l'app calcola i pesi, ne mostra il costo di ribilanciamento e, dopo conferma, li
-assegna.
-\begin{figure}[htbp]
-  \centering
-  %\includegraphics[width=0.32\textwidth]{ui_methods.png}\hfill
-  %\includegraphics[width=0.32\textwidth]{ui_weights.png}
-  \caption{Selezione del metodo di allocazione e visualizzazione dei pesi
-  risultanti per ciascun metodo.}
-  \label{fig:ui-weights}
-\end{figure}
-
-Infine, un grafico di confronto mostra l'andamento simulato (\emph{backtest}) del
-capitale secondo le diverse strategie, affiancato da una tabella con le metriche
-principali (rendimento, Sharpe ratio, maximum drawdown), così che l'utente possa
-valutare visivamente le differenze tra i metodi.
-\begin{figure}[htbp]
-  \centering
-  %\includegraphics[width=0.45\textwidth]{ui_backtest.png}
-  \caption{Confronto delle strategie tramite backtest, con tabella delle metriche.}
-  \label{fig:ui-backtest}
 \end{figure}
 
 \section{Dettagli implementativi}
@@ -238,3 +272,116 @@ Anche qui però la differenza è minima e trascurabile e di fatto l'esecuzione o
 
 Si è dimostrato quindi che le decisioni prese dall'app sul dispositivo sono equivalenti a quelle calcolabili nell'ambiente
 di sviluppo.
+
+
+\section{Strategie}
+\label{set:strategie}
+
+In questa sezione viene mostrata l'implementazione delle varie strategia all'interno dell'applicazione.
+
+Il modello e la sua implementazione nell'app sono già stati descritti nei capitoli e sezioni precedenti.
+
+\subsection{Equipesato}
+L'equipesato consiste semplicemente nel dividere il capitale equamente tra i vari titoli nel portafoglio.
+
+\subsection{Inverse Volatility}
+\label{sec:inverse_volatility}
+
+L'idea alla base di questa strategia consiste nell'assegnare il capitale in modo inversamente proporzionale alla volatilità di ciascun asset, penalizzando i titoli più nervosi e premiando quelli più stabili.
+
+Il calcolo dell'allocazione si divide in tre passaggi principali:
+\begin{enumerate}
+    \item \textbf{Misura del rischio}: Per ogni asset $i$, si calcola la volatilità storica $\sigma_i$ applicando la deviazione standard campionaria sui rendimenti.
+    \item \textbf{Inversione}: Si calcola il reciproco della volatilità $\frac{1}{\sigma_i}$. Se un titolo presenta un'elevata volatilità, il suo inverso risulterà basso, al contrario per un titolo stabile il reciproco assume un valore più elevato.
+    \item \textbf{Normalizzazione}: Si divide l'inverso della volatilità del singolo asset per la somma degli inversi di tutti gli asset del portafoglio. La somma finale dei pesi $w_i$ è pari a $1$.
+\end{enumerate}
+
+La formula matematica per il calcolo del peso $w_i$ dell'asset $i$-esimo è definita come:
+
+\begin{equation}
+    w_i = \frac{\frac{1}{\sigma_i}}{\sum_{j=1}^{N} \frac{1}{\sigma_j}}
+\end{equation}
+
+dove $w_i$ è il peso dell'asset $i$, $\sigma_i$ la deviazione standard campionaria dei suoi rendimenti e $N$ il numero di asset.
+
+\subsection{Kelly Criterion}
+\label{sec:kelly_criterion}
+
+Il criterio di Kelly calcola l'esposizione ottimale di capitale per massimizzare il tasso di crescita logaritmico del portafoglio nel tempo. 
+La formula classica in forma matriciale è definita come:
+
+\begin{equation}
+    \mathbf{f}^* = \mathbf{\Sigma}^{-1} \boldsymbol{\mu}
+\end{equation}
+
+\begin{itemize}
+    \item $\mathbf{f}^*$ è il vettore dei pesi ideali delle posizioni;
+    \item $\mathbf{\Sigma}^{-1}$ è l'inversa della matrice di covarianza dei rendimenti;
+    \item $\boldsymbol{\mu}$ è il vettore dei rendimenti attesi.
+\end{itemize}
+
+Questa formula è molto sensibile agli errori di stima degli input e tende a suggerire una leva finanziaria eccessivamente aggressiva e instabile che può facilmente portare alla distruzione del capitale in caso di errore.
+Per questo motivo sono state applicate le seguenti modifiche:
+
+\begin{enumerate}
+    \item \textbf{Regolarizzazione della Matrice}: Se due o più titoli presentano un comportamento fortemente correlato o se il numero di campioni storici è ridotto, la matrice di covarianza diventa singolare (o quasi singolare). 
+    L'inversione di una tale matrice in JavaScript comporta gravi errori di precisione numerica o il blocco dell'applicazione. 
+    Per garantire la stabilità computazionale, viene applicata una regolarizzazione sui parametri fuori dalla diagonale principale:
+    \begin{equation}
+        \mathbf{\Sigma}_{\text{shrunk}}(i, j) = 
+        \begin{cases} 
+            \mathbf{\Sigma}(i, j) & \text{se } i = j \quad \text{(diagonale principale: varianze inalterate)} \\ 
+            (1 - \delta) \cdot \mathbf{\Sigma}(i, j) & \text{se } i \neq j \quad \text{(fuori diagonale: covarianze ridotte del } 15\% \text{)}
+        \end{cases}
+    \end{equation}
+    In questo modo, i titoli appaiono leggermente meno correlati tra loro, garantendo un'inversione matriciale numericamente stabile.
+
+    \item \textbf{Scalamento Half-Kelly}: Dopo aver calcolato il vettore $\mathbf{f}^*$, si applica uno scalamento dimezzandone i valori:
+    \begin{equation}
+        \mathbf{f}_{\text{half}} = \frac{1}{2} \mathbf{f}^*
+    \end{equation}
+    Lo scopo è diminuire i drawdown estremi causati da una leva eccessiva. Dimezzare le posizioni riduce la varianza complessiva del portafoglio del $75\%$, sacrificando solo una quota minima del tasso di crescita teorico.
+
+    \item \textbf{Vincolo Long-Only}: La formula originale restituisce valori sia positivi (acquisto) sia negativi (vendita allo scoperto). Poiché lo short selling richiede garanzie sui margini e autorizzazioni complesse, si eliminano le posizioni corte azzerando le componenti negative e ottenendo pesi non negativi $f_i^{\text{long}}$.
+
+    \item \textbf{Cap della Leva Massima}: Il criterio di Kelly tende ad adottare una strategia di leva molto aggressiva. Si è stabilito quindi un limite massimo alla leva finanziaria $L_{\max} = 2$. Se l'esposizione lorda complessiva $L = \sum f_i^{\text{long}}$ supera tale soglia, i pesi vengono riallocati proporzionalmente:
+    \begin{equation}
+        \mathbf{f}_{\text{finale}} = 
+        \begin{cases} 
+            \mathbf{f}^{\text{long}} & \text{se } L \le L_{\max} \\ 
+            \mathbf{f}^{\text{long}} \cdot \frac{L_{\max}}{L} & \text{se } L > L_{\max} 
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+
+
+
+\subsection{Volatility Targeting}
+\label{sec:target_volatility}
+
+Il concetto teorico di questa strategia è spiegato nei fondamenti teorici (Cap.~\ref{chap:backgrounds}).
+In questa sezioni si discute la sua implementazione nell'app.
+L'implementazione segue tre passaggi principali:
+
+\begin{enumerate}
+    \item \textbf{Volatilità del portafoglio (giornaliera e annualizzata)}: Si calcola prima la deviazione standard giornaliera mediante la forma quadratica della matrice di covarianza $\mathbf{\Sigma}$ e del vettore dei pesi base $\mathbf{w}_{\text{base}}$, per poi annualizzarla moltiplicando per la radice dei giorni lavorativi ($\sqrt{252}$):
+    \begin{equation}
+        \sigma_{\text{port, giornaliera}} = \sqrt{\mathbf{w}_{\text{base}}^T \mathbf{\Sigma} \mathbf{w}_{\text{base}}}
+    \end{equation}
+    \begin{equation}
+        \sigma_{\text{port, annua}} = \sigma_{\text{port, giornaliera}} \times \sqrt{252}
+    \end{equation}
+
+    \item \textbf{Fattore di scalamento}: Viene calcolato il coefficiente di riduzione $\text{scale}$:
+    \begin{equation}
+        \text{scale} = \min\left(1, \; \frac{\sigma_{\text{target}}}{\sigma_{\text{port, annua}}}\right)
+    \end{equation}
+    L'operatore $\min(1, \dots)$ impedisce l'impiego della leva, evitando che l'esposizione superi il $100\%$ del capitale nei periodi di bassa volatilità.
+
+    \item \textbf{Pesi scalati}: Ogni peso dell'allocazione base viene ridimensionato applicando il fattore di scalamento:
+    \begin{equation}
+        \mathbf{w}_{\text{finale}} = \mathbf{w}_{\text{base}} \times \text{scale}
+    \end{equation}
+\end{enumerate}
+
+La funzione gestisce anche il caso limite in cui la volatilità annualizzata sia nulla ($\sigma_{\text{port, annua}} = 0$), impostando il fattore di scala a $1$ per evitare divisioni per zero.

@@ -1,8 +1,5 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Riassunto}{i}{chapter*.1}%
-\contentsline {chapter}{Acknowledgment}{iii}{chapter*.2}%
-\contentsline {chapter}{List of Figures}{ix}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{xi}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Introduzione}{1.0}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Stato dell'arte}{1.1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Definizione del problema}{1.1}{section.1.2}%
@@ -37,7 +34,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Strategia appresa e formula di riferimento}{3.1}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Funzione di reward}{3.2}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Protocollo di valutazione}{3.2}{subsection.3.2.3}%
-\contentsline {paragraph}{Confronto a parità di cash medio.}{3.3}{table.caption.5}%
+\contentsline {paragraph}{Confronto a parità di cash medio.}{3.3}{table.caption.4}%
 \contentsline {subsection}{\numberline {3.2.4}Baseline di confronto}{3.3}{subsection.3.2.4}%
 \contentsline {subsection}{\numberline {3.2.5}Metriche di valutazione}{3.3}{subsection.3.2.5}%
 \contentsline {paragraph}{Metriche primarie.}{3.3}{subsection.3.2.5}%
@@ -52,7 +49,7 @@
 \contentsline {subsubsection}{risk\_state (B, 6)}{4.1}{subsection.4.1.2}%
 \contentsline {subsection}{\numberline {4.1.3}Architettura}{4.2}{subsection.4.1.3}%
 \contentsline {subsubsection}{Rete}{4.3}{subsection.4.1.3}%
-\contentsline {paragraph}{GRU}{4.4}{figure.caption.6}%
+\contentsline {paragraph}{GRU}{4.4}{figure.caption.5}%
 \contentsline {paragraph}{Actor}{4.4}{lstnumber.-1.1}%
 \contentsline {paragraph}{Overlay di volatility targeting}{4.5}{lstnumber.4.1.4}%
 \contentsline {paragraph}{Critic}{4.5}{lstnumber.4.1.4}%
@@ -69,36 +66,38 @@
 \contentsline {chapter}{\numberline {5}Esperimenti e Risultati}{5.0}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Conclusioni: cosa aggiunge l'apprendimento}{5.0}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Esperimento 1: Come influisce il parametro $\sigma _{\mathrm {target}}$}{5.0}{subsection.5.1.1}%
-\contentsline {paragraph}{Conservatività, non intelligenza.}{5.1}{table.caption.7}%
+\contentsline {paragraph}{Conservatività, non intelligenza.}{5.1}{table.caption.6}%
 \contentsline {subsection}{\numberline {5.1.2}Esperimento 2: L'esponente al centro delle osservazioni}{5.3}{subsection.5.1.2}%
 \contentsline {subsubsection}{Esponente appreso}{5.4}{subsection.5.1.2}%
-\contentsline {paragraph}{Una loss dedicata all'esponente}{5.5}{table.caption.11}%
-\contentsline {subsubsection}{Regolare l'esponente con una regola}{5.7}{table.caption.13}%
+\contentsline {paragraph}{Una loss dedicata all'esponente}{5.5}{table.caption.10}%
+\contentsline {subsubsection}{Regolare l'esponente con una regola}{5.7}{table.caption.12}%
 \contentsline {subsection}{\numberline {5.1.3}Generalità: trasferimento su panieri diversi}{5.8}{subsection.5.1.3}%
 \contentsline {subsection}{\numberline {5.1.4}Filo conduttore}{5.10}{subsection.5.1.4}%
 \contentsline {chapter}{\numberline {6}Applicazione Mobile}{6.0}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Interfaccia e funzionalità}{6.0}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Elenco dei titoli}{6.0}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Dettaglio del titolo}{6.0}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Dashboard e gestione del portafoglio}{6.1}{subsection.6.1.3}%
-\contentsline {section}{\numberline {6.2}Dettagli implementativi}{6.1}{section.6.2}%
-\contentsline {subsubsection}{Sorgente e struttura del dato}{6.2}{section.6.2}%
-\contentsline {subsubsection}{Pipeline di aggiornamento automatico}{6.2}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Datasets}{6.2}{subsection.6.2.1}%
-\contentsline {subsubsection}{Database locale}{6.3}{subsection.6.2.1}%
-\contentsline {subsubsection}{Sincronizzazione lato applicazione}{6.3}{figure.caption.23}%
-\contentsline {subsubsection}{Inizializzazione e primo avvio}{6.4}{figure.caption.23}%
-\contentsline {subsubsection}{Limiti}{6.4}{figure.caption.23}%
-\contentsline {subsection}{\numberline {6.2.2}Esecuzione del modello on-device}{6.4}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Motore di backtest}{6.5}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Validazione numerica}{6.6}{subsection.6.2.4}%
-\contentsline {chapter}{\numberline {7}Formule}{7.0}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Strategie}{7.0}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Inverse Volatility}{7.0}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Kelly Criterion}{7.1}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Target Volatility}{7.3}{subsection.7.1.3}%
-\contentsline {chapter}{\numberline {8}Conclusioni}{8.0}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Discussione: un risultato atteso nella letteratura}{8.0}{section.8.1}%
-\contentsline {paragraph}{Limiti.}{8.1}{section.8.1}%
-\contentsline {paragraph}{Contributo di questo lavoro.}{8.1}{section.8.1}%
-\contentsline {chapter}{Bibliography}{B1}{section.8.1}%
+\contentsline {section}{\numberline {6.1}Obiettivo dell'applicazione}{6.0}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Interfaccia e funzionalità}{6.1}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Dashboard e gestione del portafoglio}{6.1}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Elenco dei titoli}{6.4}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Dettaglio del titolo}{6.5}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Dettagli implementativi}{6.5}{section.6.3}%
+\contentsline {subsubsection}{Sorgente e struttura del dato}{6.6}{section.6.3}%
+\contentsline {subsubsection}{Pipeline di aggiornamento automatico}{6.6}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Datasets}{6.6}{subsection.6.3.1}%
+\contentsline {subsubsection}{Database locale}{6.7}{subsection.6.3.1}%
+\contentsline {subsubsection}{Sincronizzazione lato applicazione}{6.8}{figure.caption.22}%
+\contentsline {subsubsection}{Inizializzazione e primo avvio}{6.8}{figure.caption.22}%
+\contentsline {subsubsection}{Limiti}{6.8}{figure.caption.22}%
+\contentsline {subsection}{\numberline {6.3.2}Esecuzione del modello on-device}{6.8}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Motore di backtest}{6.9}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Validazione numerica}{6.10}{subsection.6.3.4}%
+\contentsline {section}{\numberline {6.4}Strategie}{6.10}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Equipesato}{6.11}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Inverse Volatility}{6.11}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Kelly Criterion}{6.11}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Volatility Targeting}{6.13}{subsection.6.4.4}%
+\contentsline {chapter}{\numberline {7}Conclusioni}{7.0}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Discussione: un risultato atteso nella letteratura}{7.0}{section.7.1}%
+\contentsline {paragraph}{Limiti.}{7.1}{section.7.1}%
+\contentsline {paragraph}{Contributo di questo lavoro.}{7.1}{section.7.1}%
+\contentsline {chapter}{Bibliography}{B1}{section.7.1}%
+\contentsline {chapter}{Acknowledgment}{B3}{chapter*.24}%

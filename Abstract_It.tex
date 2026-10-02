@@ -1,2 +1,13 @@
-% Riassunto (Italiano) — segnaposto, sostituire con il testo definitivo.
-\noindent Segnaposto per il riassunto in italiano.
+% !TEX root = main.tex
+Questo lavoro indaga se la componente appresa di un agente di Deep Reinforcement Learning aggiunga valore rispetto a una regola strutturale fissa che punta a regolare l'esposizione al mercato. 
+L'agente addestrato con PPO su una rete ricorrente (GRU) e con politica basata su una distribuzione Beta, non sostituisce la strategia di volatility targeting di Moreira e Muir ma la corregge attraverso un unico moltiplicatore appreso $m_\theta$.
+La selezione dei titoli è congelata a equal-weight in modo da isolare la sola decisione di esposizione e permettere un confronto pulito tra ciò che la rete impara e ciò che la formula fornisce.
+
+Il modello è valutato out-of-sample su più regimi di mercato e su panieri diversi, con protocollo multi-seed e una frontiera di controllo a parità di liquidità media. 
+I risultati mostrano che la parte appresa non aggiunge nulla che non si possa ottenere scegliendo i parametri strutturali fissi. 
+Il minor drawdown dell'agente deriva dal mantenere più liquidità, non da un reale tempismo, l'agente quindi non ha svilupato alcun tipo d'intelligenza di market timing. 
+L'agente ricade sulla frontiera della regola deterministica, resta dominato sullo Sharpe e la dipendenza dal regime dell'esponente non è sfruttabile in tempo reale.
+La ragione è economica: la volatilità è prevedibile, la direzione del mercato no.
+
+Il contributo non è dimostrare che l'apprendimento batte una regola, ma quantificare con rigore, tramite ablation e controlli, il limite dell'adattività appresa in un dominio a basso rapporto segnale/rumore. 
+Come obiettivo secondario è stata sviluppata un'applicazione mobile local-first che esegue il modello on-device, rendendo le strategie studiate concretamente utilizzabili.

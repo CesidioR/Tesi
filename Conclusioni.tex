@@ -9,7 +9,7 @@ la formula su cui si basa.
 Questo accade perché l'unico segnale che il modello riesce a sfruttare è quello della volatilità,
 ed proprio il dato principale su cui si basa la formula statica di partenza.
 La volatilità infatti può essere predetta: essa infatti tende ad addensarsi e susseguirsi, fasi ad altà volatilità sono seguite da altre fasi simili
-e ugualmente succede per le fasi di bassa volatilità. Questa proprietà è ben documentata e rende la volatilità un segnale stimabile
+e ugualmente succede per le fasi di bassa volatilità. Questa proprietà, nota come volatility clustering, è ben documentata~\citep{engle1982arch} e rende la volatilità un segnale stimabile
 in anticipo.
 E proprio questa caratteristica che ha portato al basare il modello sul volatility timing utilizzando la formula del volatility targeting di Moreira Muir.
 Il segnale mancante che la formula non ha e che permetterebbe al modello di battere la formula di partenza
@@ -22,37 +22,28 @@ modi per riuscire a prevedere la direzione futura del mercato.
 L'impossibilità di prevedere la direzione del mercato specialmente nel DRL è data dal fatto che la maggior parte 
 delle informazioni che si possono ottenere dagli scambi giornalieri è quasi interamente rumore. Quando i modelli cercano di estrarre delle 
 informazioni rilevanti da questi dati finiscono solo per fare over-fitting sul backtest in cui è stato addestrato.
-Questo spiega anche perché le prove fuori campione di modelli che sono stati presentati come funzionali in campione si dimostrano 
-per la maggior parte un buco nell'acqua \citet{bailey2014pseudo}.
 
 Tirando le conclusioni il fatto che il modello converga sulla formula di partenza non è del tutto un fallimento.
 Può essere visto come un esito informativo, esso sebbene confermi che il valore della strategia risieda nella sua struttura 
 anziché nella parte appresa, dimostra che l'agente in assenza di segnale sfruttabile ha imparato la scelta corretta, ovvero riprodurre la regola ottimale 
-evitando di inseguire pattern inconcludenti e degenrare.
+evitando di inseguire pattern inconcludenti e degenerare.
 
 
 
 Infine va riconosciuto il confine di questa conclusione. \citet{gu2020empirical}
-documentano che il machine learning \emph{aggiunge} valore nell'asset pricing
-empirico, ma nella dimensione \emph{cross-sectional} --- la selezione tra molti
-titoli --- e attraverso segnali come momentum, liquidita' e volatilita'. E'
+documentano che il machine learning aggiunge valore nell'asset pricing
+empirico, ma nella dimensione cross-sectional, ovverola selezione tra molti
+titoli e attraverso segnali come momentum, liquidita' e volatilita'. E'
 esattamente la leva che qui e' stata congelata: il valore dell'apprendimento, se
 esiste in questo dominio, va cercato nella selezione cross-asset e in universi
-meno efficienti, non in un overlay piu' sofisticato sulla sola esposizione. Il
-contributo di questo lavoro non e' dunque dimostrare che l'apprendimento batte una
-regola, ma quantificare con rigore, tramite ablation e controlli, il limite
-dell'adattivita' appresa in un regime a basso rapporto segnale/rumore.
+meno efficienti, non in un overlay piu' sofisticato sulla sola esposizione.
 
-\paragraph{Limiti.} Le conclusioni valgono per l'universo (large-cap S\&P~500,
-selezione congelata), i periodi e gli obiettivi considerati. Su mercati
-strutturalmente meno efficienti, o in problemi dove la selezione cross-asset e'
-determinante, il margine per l'apprendimento potrebbe riaprirsi.
+\paragraph{Limiti.} Le conclusioni valgono entro i confini descritti
+nell'introduzione (Sez.~\ref{subsec:scope}): universo large-cap, selezione
+congelata, obiettivo di contenimento del drawdown e periodi considerati.
 
 \paragraph{Contributo di questo lavoro.}
-La maggior parte dei lavori che aplicano il reinforcement learning alla gestione del portafoglio presentano un solo backtest
-Il problema è che facendo molti backtest con varie combinazioni è facile trovarne una che nel suo campione si dimostra vincente
-per puro caso. Tuttavia questo risultato vincente nel backtest in campione non si traduce ugualmente fuori campione come dimostrato da \citet{bailey2014pseudo}.
-In questo lavoro sono state testate diverse configurazioni su vari panieri e periodi temporali, testando il modello e isolando le sue parti aprendibili per capirne i valori e i problemi di ognuna.
+A differenza della maggior parte dei lavori, che riportano un singolo backtest vincente ma fragile fuori campione~\citep{bailey2014pseudo}, in questo lavoro sono state testate diverse configurazioni su vari panieri e periodi, isolando le parti apprendibili del modello per capirne valore e limiti.
 Le accortezze che sono state fatte sono:
 \begin{itemize}
     \item L'apprendimento non sostituisce la strategia del volatility targeting e questo permette un confronto pulito tra ciò che la rete impara e quello che la formula fornisce.
@@ -64,11 +55,4 @@ Le accortezze che sono state fatte sono:
 Infine tutti quelle che sembravano azioni vantaggiose del modello sono state analizzate per capirne le cause, e se fossero o meno date da un effetiva intelligenza del modello o semplicemente dalla sua maggiore conservatività.
 
 
-Il contributo, in sintesi, non è dimostrare che l'apprendimento batte una regola, ma \textbf{quantificare con rigore, tramite ablation e controlli, il limite dell'adattività appresa} in un dominio a basso rapporto segnale/rumore e spiegarne la ragione economica.
-
-1 Stato dell'arte con parte finale dedicata alle motivazioni
-2 Progettazione dataset e metodi
-3 Implementazione
-4 risultati
-5 Applicazione mobile comprensiva di workflow della UI e lati salienti dell'Implementazione
-6 Conclusioni
+Per concludere il contributo non è dimostrare che l'apprendimento batte una regola, ma \textbf{quantificare con rigore, tramite ablation e controlli, il limite dell'adattività appresa} in un dominio a basso rapporto segnale/rumore e spiegarne la ragione economica.

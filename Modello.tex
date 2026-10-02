@@ -83,7 +83,7 @@ Ogni giorno comprime lo storico di ogni asset con una GRU condivisa facendone la
 Da lì produce la sua decisione indicando quanto esporsi al mercato, ovvero gestisce quanto parte del portafoglio viene investita (equal-weight per gli asset) e quanta parte rimane in contanti. 
 La rete si divide in sei componenti fondamentali, riassunti nel diagramma di Fig.~\ref{fig:architettura}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{architettura.pdf}
 \caption{Architettura del modello: dalla finestra per-asset, tramite GRU condivisa e mean-pooling, al vettore \lstinline{head_in} (con \lstinline{risk_state} e \lstinline{prev_weights}), fino all'overlay di volatility targeting e ai pesi di portafoglio.}
